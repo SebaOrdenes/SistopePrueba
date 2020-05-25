@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "recibirArgumentos.h"
-//#include "leerImagenesRGB.h"
+#include "leerImagenesRGB.h"
 
 int main(int argc, char * argv[]){
 	int cantidadDeImagenes, umbralParaBinarizarLaImagen,umbralParaClasificacion,bandera;
@@ -14,5 +14,6 @@ int main(int argc, char * argv[]){
 	printf("El umbral para clasificar la imagen es: %d\n", umbralParaClasificacion);
 	printf("El nombre del archivo que contiene la mascara es: %s\n", nombreArchivoMascara);
 	printf("La condición de la bandera es: %d\n", bandera);
+	leerImagenes();
 	return 0;
 }
