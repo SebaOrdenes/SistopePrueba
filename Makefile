@@ -8,13 +8,13 @@ ejemplo_objects = $(ejemplo_source:.c=.o)
 CC=gcc
 CFLAGS = -Wall
 LIBS = -lm
-
+JPEG = -ljpeg
 depends = .depends
 
 build: $(ejemplo_out)
 
 $(ejemplo_out) : $(ejemplo_objects)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LIBS) $(JPEG)
 
 $(objects):
 	$(CC) $(CFLAGS) -c -o $@ $*.c

@@ -14,6 +14,7 @@ int main(int argc, char * argv[]){
 	printf("El umbral para clasificar la imagen es: %d\n", umbralParaClasificacion);
 	printf("El nombre del archivo que contiene la mascara es: %s\n", nombreArchivoMascara);
 	printf("La condición de la bandera es: %d\n", bandera);
-	leerImagenes();
+	//leerImagenes();
+	leerImagenes(cantidadDeImagenes,umbralParaBinarizarLaImagen,umbralParaClasificacion,bandera,nombreArchivoMascara);
 	return 0;
 }
