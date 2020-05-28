@@ -20,11 +20,11 @@ void rgbAgray(int alto,int ancho,unsigned char ***pixeles,int numeroImagen,int u
 			//printf("%d %d\n",gray[j][k],i);
 		}
 	}
-	for(int j=0;j<alto;j++){
+	/*for(int j=0;j<alto;j++){
 		for(int k=0;k<ancho;k++){
 			printf("%d ",gray[j][k]);
 		}
 		printf("\n");
-	}
+	}*/
 
 }
