@@ -7,22 +7,22 @@
 #include <stdint.h>
 #include "leerImagenesRGB.h"
 #include <jpeglib.h>
-
+#include "convertirImagenAEscalaDeGrises.h"
 
 //Entradas:
 //Funcionamiento:
 //Salidas:
 void leerImagenes(int cantidadDeImagenes,int umbralParaBinarizarLaImgene,int umbralParaClasificacion,int bandera, char * nombreMascara) {
   unsigned char r, g, b;
-  int ancho, alto,contador;;
-  int ** pixeles;
+  int ancho, alto,contador;
   char nombre[20];
   struct jpeg_decompress_struct cinfo;
   struct jpeg_error_mgr jerr;    
   JSAMPARRAY pJpegBuffer;    
   int row_stride;
   FILE * imagen;
-  for(int i=1;i<=cantidadDeImagenes;i++){    
+  for(int i=1;i<=cantidadDeImagenes;i++){ 
+  	unsigned char ** pixeles;  
  	contador=0;
   	sprintf(nombre,"imagen_%i.jpg",i);      
   	if ((imagen = fopen(nombre, "rb")) == NULL) {
@@ -36,9 +36,9 @@ void leerImagenes(int cantidadDeImagenes,int umbralParaBinarizarLaImgene,int umb
   	(void)jpeg_start_decompress(&cinfo);
   	ancho = cinfo.output_width;
   	alto = cinfo.output_height;
-  	pixeles=(int**)malloc(ancho*alto*sizeof(int*));
+  	pixeles=(unsigned char**)malloc(ancho*alto*sizeof(unsigned char*));
   	for(int j=0;j<(ancho*alto);j++){
-  		pixeles[j]=(int*)malloc(3*sizeof(int));
+  		pixeles[j]=(unsigned char*)malloc(3*sizeof(unsigned char));
   	}
 	row_stride = ancho * cinfo.output_components;
   	pJpegBuffer = (*cinfo.mem->alloc_sarray)
@@ -54,18 +54,25 @@ void leerImagenes(int cantidadDeImagenes,int umbralParaBinarizarLaImgene,int umb
         	g = r;
         	b = r;
       		}
-      		pixeles[contador][0]=(int)r;
-      		pixeles[contador][1]=(int)g;
-      		pixeles[contador][2]=(int)b;
+      		pixeles[contador][0]=r;
+      		pixeles[contador][1]=g;
+      		pixeles[contador][2]=b;
+      		contador++;
+      		
     	}
+    	
   	}
   	fclose(imagen);
+  	(void) jpeg_finish_decompress(&cinfo);
+  	(void)jpeg_destroy_decompress(&cinfo);
+  	rgbAgray(alto,ancho,&pixeles,i,umbralParaBinarizarLaImgene,umbralParaClasificacion,nombreMascara,bandera);
+  	/*for(int z=0;z<(ancho*alto);z++){
+  		printf("%d %d %d\n",pixeles[z][0],pixeles[z][1],pixeles[z][2]);
+  	}*/
   	for(int j=0; j<(ancho*alto);j++){
   		free(pixeles[j]);
   	}
   	free(pixeles);
-  	(void) jpeg_finish_decompress(&cinfo);
-  	(void)jpeg_destroy_decompress(&cinfo);
   }
 
 
