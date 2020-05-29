@@ -11,6 +11,7 @@
 void rgbAgray(int alto,int ancho,unsigned char ***pixeles,int numeroImagen,int umbralBinarizar,int umbrarClasificar,char* nombreArchivoMascara,int bandera){
 	unsigned char gray[alto][ancho];
 	int i=0;
+	int numeros[9];
 	for(int j=0;j<alto;j++){
 		for(int k=0;k<ancho;k++){
 			gray[j][k]=(int)round(((double)(*pixeles)[i][0])*0.3+((double)(*pixeles)[i][1])*0.59+((double)(*pixeles)[i][2])*0.11);
@@ -27,5 +28,6 @@ void rgbAgray(int alto,int ancho,unsigned char ***pixeles,int numeroImagen,int u
 		}
 		printf("\n");
 	}*/
-applyFilter();
+
+int *arreglo= leerMascara(nombreArchivoMascara,numeros);
 }
