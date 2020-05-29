@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <math.h>
 #include "convertirImagenAEscalaDeGrises.h"
+#include "aplicarFiltro.h"
 
 //Entradas:
 //Funcionamiento:
@@ -26,5 +27,5 @@ void rgbAgray(int alto,int ancho,unsigned char ***pixeles,int numeroImagen,int u
 		}
 		printf("\n");
 	}*/
-
+applyFilter();
 }
