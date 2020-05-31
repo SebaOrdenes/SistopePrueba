@@ -11,7 +11,7 @@
 void rgbAgray(int alto,int ancho,unsigned char ***pixeles,int numeroImagen,int umbralBinarizar,int umbrarClasificar,char* nombreArchivoMascara,int bandera){
 	unsigned char ** gray;
 	int i=0;
-	int numeros[9];
+	//int numeros[9];
 	gray=(unsigned char **)malloc(alto*sizeof(unsigned char*));
 	for(int z=0;z<alto;z++){
 		gray[z]=(unsigned char*)malloc(ancho*sizeof(unsigned char));
@@ -34,5 +34,5 @@ void rgbAgray(int alto,int ancho,unsigned char ***pixeles,int numeroImagen,int u
 	}*/
 
 	//int *arreglo= leerMascara(nombreArchivoMascara,numeros);
-	applyFilter(gray);
+	applyFilter(gray,nombreArchivoMascara);
 }

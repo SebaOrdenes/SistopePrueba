@@ -57,17 +57,103 @@ int* leerMascara(char*nombreMascara, int*numeros){
   i++;
 
 } 
-  printf("Numero caracteres son %d",i);
-  printf("EL ARREGLO POSICION 0 ES: %d", numeros[0]);
+ // printf("Numero caracteres son %d",i);
+  //printf("EL ARREGLO POSICION 0 ES: %d", numeros[0]);
  
 fclose ( fp );
  return(numeros);
 } 
 
+//funcion que, en base a una posicion x e y dada, retorna los valores de las 8 posiciones colindantes a esa posicion
+int* getNumeros(int posX, int posY,unsigned char** matrizGray,int* lista, int altoMatriz,int anchoMatriz){
+    int tempX;
+    int tempY;
+    tempX= posX -1;
+    tempY= posY -1;
+    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[0]=0;}
+    else
+    {lista[0]= matrizGray[tempX][tempY];}
+
+    tempX= posX-1;
+    tempY= posY;
+    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[1]=0;}
+    else
+    {lista[1]= matrizGray[tempX][tempY];}
+    
+    tempX= posX-1;
+    tempY=posY+1;
+    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[2]=0;}
+    else
+    {lista[2]= matrizGray[tempX][tempY];}
+
+    tempX= posX;
+    tempY=posY-1;
+    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[3]=0;}
+    else
+    {lista[3]= matrizGray[tempX][tempY];}
+
+    tempX= posX;
+    tempY=posY;
+    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[4]=0;}
+    else
+    {lista[4]= matrizGray[tempX][tempY];}
+
+    tempX= posX;
+    tempY=posY+1;
+    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[5]=0;}
+    else
+    {lista[5]= matrizGray[tempX][tempY];}
+
+    tempX= posX+1;
+    tempY=posY-1;
+    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[6]=0;}
+    else
+    {lista[6]= matrizGray[tempX][tempY];}
+
+    tempX= posX+1;
+    tempY=posY;
+    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[7]=0;}
+    else
+    {lista[7]= matrizGray[tempX][tempY];}
+
+    tempX= posX+1;
+    tempY=posY+1;
+    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[8]=0;}
+    else
+    {lista[8]= matrizGray[tempX][tempY];}
+
+
+return(lista);
+
+}
+
+
+//funcion que calcula el numero a poner en la nueva matriz una vez aplicada la mascara, el cual habra que posicionalo en las mismas
+//coordenadas x e y iniciales
+int resultadoMascara(int*numeroMatriz, int*numerosMascara){
+    int contador;
+    for (int i = 0; i < 9; i++)
+    {
+       int tempA= numerosMascara[i];
+       int tempB= numeroMatriz[i];
+       int tempC= tempA*tempB;
+       contador= contador+tempC;
+       
+    }
+    return contador;
+    
+}
 
 
 
 
-void applyFilter(unsigned char **MatrizGray){
-	printf("%d\n",MatrizGray[0][0]);
+
+void applyFilter(unsigned char **MatrizGray, char*nombreArchivoMascara){
+	int numeros[9];
+    int *arreglo= leerMascara(nombreArchivoMascara,numeros);
+	printf("numero de la matriz es %d\n",MatrizGray[0][0]);
+    printf("numero del arreglo %d", arreglo[2]);
+
+
+
 }
