@@ -70,10 +70,10 @@ void leerImagenes(int cantidadDeImagenes,int umbralParaBinarizarLaImgene,int umb
 
   	/*for(int z=0;z<(ancho*alto);z++){
   		printf("%d %d %d\n",pixeles[z][0],pixeles[z][1],pixeles[z][2]);
-  	}
+  	}*/
   	for(int j=0; j<(ancho*alto);j++){
   		free(pixeles[j]);
-  	}*/
+  	}
   	free(pixeles);
   }
 

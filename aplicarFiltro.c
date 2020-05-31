@@ -35,7 +35,7 @@ int* leerMascara(char*nombreMascara, int*numeros){
     
      
     while(!feof(fp)){
-        fscanf(fp,"%s",buffer);
+        fscanf(fp,"%s\n",buffer);
         printf("%s, ",buffer);
 
         if(strlen(buffer)==1 && buffer[0]=='-'){  //si es un caracter y es - el programa muere
@@ -56,7 +56,7 @@ int* leerMascara(char*nombreMascara, int*numeros){
     numeros[i]= atoi(buffer);
   i++;
 
-}
+} 
   printf("Numero caracteres son %d",i);
   printf("EL ARREGLO POSICION 0 ES: %d", numeros[0]);
  
@@ -68,5 +68,6 @@ fclose ( fp );
 
 
 
-void applyFilter(){
+void applyFilter(unsigned char **MatrizGray){
+	printf("%d\n",MatrizGray[0][0]);
 }
