@@ -12,7 +12,7 @@ void validar(char num[], int cont){
 
         if(!isdigit(num[i]) ) {
             
-            printf("NUMERO INVALIDO INGRESADO. ");
+            printf("NUMERO INVALIDO INGRESADO.\n");
             exit(EXIT_FAILURE);
             break;
         }
@@ -36,8 +36,6 @@ int* leerMascara(char*nombreMascara, int*numeros){
      
     while(!feof(fp)){
         fscanf(fp,"%s\n",buffer);
-        printf("%s, ",buffer);
-
         if(strlen(buffer)==1 && buffer[0]=='-'){  //si es un caracter y es - el programa muere
             exit(EXIT_FAILURE);
         }
@@ -45,16 +43,17 @@ int* leerMascara(char*nombreMascara, int*numeros){
         {
             validar(buffer,1);
         }
-    
-
-    validar(buffer,1); //validamos todos los caracteres siguientes
+        else{
+            validar(buffer,1);
+        } //validamos todos los caracteres siguientes
 
     if(i>=9){    // esto por si nos ingresan un numero o caracter adicional a la matriz de 3x3
-          printf("ERROR");
-          exit(EXIT_FAILURE);}
+          printf("ERROR\n");
+          exit(EXIT_FAILURE);
+    }
 
     numeros[i]= atoi(buffer);
-  i++;
+    i++;
 
 } 
  // printf("Numero caracteres son %d",i);
@@ -70,55 +69,55 @@ int* getNumeros(int posX, int posY,unsigned char** matrizGray,int* lista, int al
     int tempY;
     tempX= posX -1;
     tempY= posY -1;
-    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[0]=0;}
+    if (tempX<0 || tempY<0 || tempX>=altoMatriz || tempY>=anchoMatriz){lista[0]=0;}
     else
     {lista[0]= matrizGray[tempX][tempY];}
 
     tempX= posX-1;
     tempY= posY;
-    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[1]=0;}
+    if (tempX<0 || tempY<0 || tempX>=altoMatriz || tempY>=anchoMatriz){lista[1]=0;}
     else
     {lista[1]= matrizGray[tempX][tempY];}
     
     tempX= posX-1;
     tempY=posY+1;
-    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[2]=0;}
+    if (tempX<0 || tempY<0 || tempX>=altoMatriz || tempY>=anchoMatriz){lista[2]=0;}
     else
     {lista[2]= matrizGray[tempX][tempY];}
 
     tempX= posX;
     tempY=posY-1;
-    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[3]=0;}
+    if (tempX<0 || tempY<0 || tempX>=altoMatriz || tempY>=anchoMatriz){lista[3]=0;}
     else
     {lista[3]= matrizGray[tempX][tempY];}
 
     tempX= posX;
     tempY=posY;
-    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[4]=0;}
+    if (tempX<0 || tempY<0 || tempX>=altoMatriz || tempY>=anchoMatriz){lista[4]=0;}
     else
     {lista[4]= matrizGray[tempX][tempY];}
 
     tempX= posX;
     tempY=posY+1;
-    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[5]=0;}
+    if (tempX<0 || tempY<0 || tempX>=altoMatriz || tempY>=anchoMatriz){lista[5]=0;}
     else
     {lista[5]= matrizGray[tempX][tempY];}
 
     tempX= posX+1;
     tempY=posY-1;
-    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[6]=0;}
+    if (tempX<0 || tempY<0 || tempX>=altoMatriz || tempY>=anchoMatriz){lista[6]=0;}
     else
     {lista[6]= matrizGray[tempX][tempY];}
 
     tempX= posX+1;
     tempY=posY;
-    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[7]=0;}
+    if (tempX<0 || tempY<0 || tempX>=altoMatriz || tempY>=anchoMatriz){lista[7]=0;}
     else
     {lista[7]= matrizGray[tempX][tempY];}
 
     tempX= posX+1;
     tempY=posY+1;
-    if (tempX<0 || tempY<0 || tempX>altoMatriz || tempY>anchoMatriz){lista[8]=0;}
+    if (tempX<0 || tempY<0 || tempX>=altoMatriz || tempY>=anchoMatriz){lista[8]=0;}
     else
     {lista[8]= matrizGray[tempX][tempY];}
 
@@ -131,7 +130,7 @@ return(lista);
 //funcion que calcula el numero a poner en la nueva matriz una vez aplicada la mascara, el cual habra que posicionalo en las mismas
 //coordenadas x e y iniciales
 int resultadoMascara(int*numeroMatriz, int*numerosMascara){
-    int contador;
+    int contador=0;
     for (int i = 0; i < 9; i++)
     {
        int tempA= numerosMascara[i];
@@ -148,12 +147,22 @@ int resultadoMascara(int*numeroMatriz, int*numerosMascara){
 
 
 
-void applyFilter(unsigned char **MatrizGray, char*nombreArchivoMascara){
+void applyFilter(unsigned char **MatrizGray, char*nombreArchivoMascara,int alto,int ancho){
 	int numeros[9];
     int *arreglo= leerMascara(nombreArchivoMascara,numeros);
-	printf("numero de la matriz es %d\n",MatrizGray[0][0]);
-    printf("numero del arreglo %d", arreglo[2]);
-
-
-
+    int ** matrizGrayConvolucionada; // se utiliza una matriz de enteros porque se necesita almacenar numeros negativos, al igual que numeros mayores a 255.
+                                    // El tipo de dato unsigned char almacena "numeros" de 0 al 255.
+    matrizGrayConvolucionada=(int **)malloc(alto*sizeof(int *));
+    for(int i=0;i<alto;i++){
+        matrizGrayConvolucionada[i]=(int *)malloc(ancho*sizeof(int));
+    }
+    int lista[9];
+    int * numerosMatriz;
+    for (int i=0;i<alto;i++){
+        for(int j=0;j<ancho;j++){
+            numerosMatriz=getNumeros(i,j,MatrizGray,lista,alto,ancho);
+            matrizGrayConvolucionada[i][j]=resultadoMascara(numerosMatriz,arreglo);
+        }
+        
+    }
 }
