@@ -12,7 +12,7 @@ void validar(char num[], int cont){
 
         if(!isdigit(num[i]) ) {
             
-            printf("NUMERO INVALIDO INGRESADO.\n");
+            printf("El símbolo %c no es valido\n",num[i]);
             exit(EXIT_FAILURE);
             break;
         }
@@ -47,20 +47,21 @@ int* leerMascara(char*nombreMascara, int*numeros){
             validar(buffer,1);
         } //validamos todos los caracteres siguientes
 
-    if(i>=9){    // esto por si nos ingresan un numero o caracter adicional a la matriz de 3x3
-          printf("ERROR\n");
+        if(i>=9){    // esto por si nos ingresan un numero o caracter adicional a la matriz de 3x3
+          printf("Error. La cantidad de números en el archivo es mayor a 9\n");
           exit(EXIT_FAILURE);
+        }
+
+        numeros[i]= atoi(buffer);
+        i++;
+
+    } 
+    if (i<9){
+        printf("Error. La cantidad de números en el archivo es menor a 9\n");
+        exit(EXIT_FAILURE);
     }
-
-    numeros[i]= atoi(buffer);
-    i++;
-
-} 
- // printf("Numero caracteres son %d",i);
-  //printf("EL ARREGLO POSICION 0 ES: %d", numeros[0]);
- 
-fclose ( fp );
- return(numeros);
+    fclose ( fp );
+    return(numeros);
 } 
 
 //funcion que, en base a una posicion x e y dada, retorna los valores de las 8 posiciones colindantes a esa posicion
@@ -122,7 +123,7 @@ int* getNumeros(int posX, int posY,unsigned char** matrizGray,int* lista, int al
     {lista[8]= matrizGray[tempX][tempY];}
 
 
-return(lista);
+    return(lista);
 
 }
 
