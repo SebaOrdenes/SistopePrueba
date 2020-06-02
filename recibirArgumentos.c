@@ -3,7 +3,35 @@
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
-#include "recibirArgumentos.h"
+//Entradas:
+//Funcionamiento:
+//Salidas:
+int esUnNumero(char * cadenaDeTexto){
+	int i=1;
+	for(int j=0; j<strlen(cadenaDeTexto);j++){
+		if(!isdigit(cadenaDeTexto[j])){
+			i=0;
+			break;
+		}
+	}
+	return i;
+}
+
+//Entradas:
+//Funcionamiento:
+//Salidas:
+void verificarSiEsNumeroEntero( char* numeroAux,int numero,char simbolo){
+	if(esUnNumero(numeroAux)==0){
+		printf("Se ingreso algo distinto a un número entero.\n");
+		fprintf(stderr,"Lo ingresado al lado derecho del simbolo -%c es: %s\n",simbolo,numeroAux);
+		exit(EXIT_FAILURE);
+	}
+	if(numero<0){
+		printf("El número ingresado es menor que cero.\n");
+		fprintf(stderr,"El numero ingresado al lado derecho del simbolo -%c es: %d\n",simbolo,numero);
+		exit(EXIT_FAILURE);
+	}
+}
 //Entradas:
 //Funcionamiento:
 //Salidas:
@@ -46,34 +74,5 @@ void recibirArgumentos(int argc,char* argv[],int * cantidadDeImagenes,int * umbr
 			default:
 					break;
 		}
-	}
-}
-
-//Entradas:
-//Funcionamiento:
-//Salidas:
-int esUnNumero(char * cadenaDeTexto){
-	int i=1;
-	for(int j=0; j<strlen(cadenaDeTexto);j++){
-		if(!isdigit(cadenaDeTexto[j])){
-			i=0;
-			break;
-		}
-	}
-	return i;
-}
-//Entradas:
-//Funcionamiento:
-//Salidas:
-void verificarSiEsNumeroEntero( char* numeroAux,int numero,char simbolo){
-	if(esUnNumero(numeroAux)==0){
-		printf("Se ingreso algo distinto a un número entero.\n");
-		fprintf(stderr,"Lo ingresado al lado derecho del simbolo -%c es: %s\n",simbolo,numeroAux);
-		exit(EXIT_FAILURE);
-	}
-	if(numero<0){
-		printf("El número ingresado es menor que cero.\n");
-		fprintf(stderr,"El numero ingresado al lado derecho del simbolo -%c es: %d\n",simbolo,numero);
-		exit(EXIT_FAILURE);
 	}
 }

@@ -2,13 +2,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
-#include "convertirImagenAEscalaDeGrises.h"
 #include "aplicarFiltro.h"
 
 //Entradas:
 //Funcionamiento:
 //Salidas:
-void rgbAgray(int alto,int ancho,unsigned char ***pixeles,int numeroImagen,int umbralBinarizar,int umbrarClasificar,char* nombreArchivoMascara,int bandera){
+void rgbAgray(int alto,int ancho,unsigned char ***pixeles,int numeroImagen,int umbralBinarizar,int umbrarClasificar,char* nombreArchivoMascara,int bandera,int ** resultadosDeClasificacion){
 	unsigned char ** gray;
 	int i=0;
 	//int numeros[9];
@@ -25,7 +24,7 @@ void rgbAgray(int alto,int ancho,unsigned char ***pixeles,int numeroImagen,int u
 			i++;
 		}
 	}
-	applyFilter(gray,nombreArchivoMascara,alto,ancho);
+	applyFilter(gray,nombreArchivoMascara,alto,ancho,numeroImagen,umbralBinarizar,umbrarClasificar,bandera,resultadosDeClasificacion);
 	for(int z=0;z<alto;z++){
 		free(gray[z]);
 	}

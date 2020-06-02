@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <string.h>
-
+#include "binarizarImagen.h"
 
 //FUNCIONAMIENTO: funcion que valida, segun la posicion del buffer, si es un numero o no.
 void validar(char num[], int cont){
@@ -148,7 +148,7 @@ int resultadoMascara(int*numeroMatriz, int*numerosMascara){
 
 
 
-void applyFilter(unsigned char **MatrizGray, char*nombreArchivoMascara,int alto,int ancho){
+void applyFilter(unsigned char **MatrizGray, char*nombreArchivoMascara,int alto,int ancho,int numreroImagen,int umbralBinarizar,int umbralClasificar,int bandera,int ** resultadosDeClasificacion){
 	int numeros[9];
     int *arreglo= leerMascara(nombreArchivoMascara,numeros);
     int ** matrizGrayConvolucionada; // se utiliza una matriz de enteros porque se necesita almacenar numeros negativos, al igual que numeros mayores a 255.
@@ -166,4 +166,9 @@ void applyFilter(unsigned char **MatrizGray, char*nombreArchivoMascara,int alto,
         }
         
     }
+    binarizar(matrizGrayConvolucionada,alto,ancho,numreroImagen,umbralBinarizar,umbralClasificar,bandera,resultadosDeClasificacion);
+    for(int i=0;i<alto;i++){
+        free(matrizGrayConvolucionada[i]);
+    }
+    free(matrizGrayConvolucionada);
 }

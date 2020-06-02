@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdint.h>
-#include "leerImagenesRGB.h"
 #include <jpeglib.h>
 #include "convertirImagenAEscalaDeGrises.h"
 
@@ -21,6 +20,7 @@ void leerImagenes(int cantidadDeImagenes,int umbralParaBinarizarLaImgene,int umb
   JSAMPARRAY pJpegBuffer;    
   int row_stride;
   FILE * imagen;
+  int * resultadosDeLaClasificacion=(int *)malloc(cantidadDeImagenes*sizeof(int));
   for(int i=1;i<=cantidadDeImagenes;i++){ 
   	unsigned char ** pixeles;  
  	contador=0;
@@ -65,13 +65,13 @@ void leerImagenes(int cantidadDeImagenes,int umbralParaBinarizarLaImgene,int umb
   	fclose(imagen);
   	(void) jpeg_finish_decompress(&cinfo);
   	(void)jpeg_destroy_decompress(&cinfo);
-  	rgbAgray(alto,ancho,&pixeles,i,umbralParaBinarizarLaImgene,umbralParaClasificacion,nombreMascara,bandera);
+  	rgbAgray(alto,ancho,&pixeles,i,umbralParaBinarizarLaImgene,umbralParaClasificacion,nombreMascara,bandera,&resultadosDeLaClasificacion);
   	for(int j=0; j<(ancho*alto);j++){
   		free(pixeles[j]);
   	}
   	free(pixeles);
   }
-
+  free(resultadosDeLaClasificacion);
 
 }
 
