@@ -65,11 +65,15 @@ void leerImagenes(int cantidadDeImagenes,int umbralParaBinarizarLaImgene,int umb
   	fclose(imagen);
   	(void) jpeg_finish_decompress(&cinfo);
   	(void)jpeg_destroy_decompress(&cinfo);
-  	rgbAgray(alto,ancho,&pixeles,i,umbralParaBinarizarLaImgene,umbralParaClasificacion,nombreMascara,bandera,&resultadosDeLaClasificacion);
+  	rgbAgray(alto,ancho,&pixeles,i,umbralParaBinarizarLaImgene,umbralParaClasificacion,nombreMascara,&resultadosDeLaClasificacion);
+  	
   	for(int j=0; j<(ancho*alto);j++){
   		free(pixeles[j]);
   	}
   	free(pixeles);
+  }
+  for(int z=0;z<cantidadDeImagenes;z++){
+  		printf("%d\n",resultadosDeLaClasificacion[z]);
   }
   free(resultadosDeLaClasificacion);
 

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-void binarizar(int ** matrizGrayConvolucionada,int alto,int ancho,int numeroImagen,int umbralBinarizar,int umbralClasificar,int bandera,int **resultadosDeClasificacion){
+#include "analizarPropiedad.h"
+void binarizar(int ** matrizGrayConvolucionada,int alto,int ancho,int numeroImagen,int umbralBinarizar,int umbralClasificar,int **resultadosDeClasificacion){
 	unsigned char ** matrizGrayBinarizada;
 	matrizGrayBinarizada=(unsigned char**)malloc(alto*sizeof(unsigned char*));
 	for(int i=0;i<alto;i++){
@@ -18,7 +18,7 @@ void binarizar(int ** matrizGrayConvolucionada,int alto,int ancho,int numeroImag
 			}
 		}
 	}
-	//llamar a otra funcion
+	clasificar(matrizGrayBinarizada,alto,ancho,numeroImagen,umbralClasificar,resultadosDeClasificacion);
 	for(int i=0;i<alto;i++){
 		free(matrizGrayBinarizada[i]);
 	}

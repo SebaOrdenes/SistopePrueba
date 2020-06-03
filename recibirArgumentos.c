@@ -72,6 +72,8 @@ void recibirArgumentos(int argc,char* argv[],int * cantidadDeImagenes,int * umbr
 					(*bandera)=1;
 					break;
 			default:
+		            fprintf(stderr, "Uso correcto: %s [-c numero entero] [-u numero entero] [-n numero entero] [-m cadena de texto][-b]\n",argv[0]);
+		            exit(EXIT_FAILURE);
 					break;
 		}
 	}
