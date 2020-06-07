@@ -13,6 +13,7 @@ void clasificar(unsigned char ** matrizGrayBinarizada,int alto,int ancho,int num
 		}
 	}
 	porcentajeDePixelesNegros=(int)round(((double)cantidadDePixelesNegros/(double)(alto * ancho))*100.0);
+	printf("%d\n",porcentajeDePixelesNegros);
 	if(porcentajeDePixelesNegros>=umbralClasificar){
 		(*resultadosDeClasificacion)[numeroImagen-1]=1;
 	}
