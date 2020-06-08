@@ -1,6 +1,6 @@
 ejemplo_out = pipeline
 
-ejemplo_headers = recibirArgumentos.h leerImagenesRGB.h convertirImagenAEscalaDeGrises.h aplicarFiltro.h binarizarImagen.h analizarPropiedad.h
+ejemplo_headers = recibirArgumentos.h leerImagenesRGB.h convertirImagenAEscalaDeGrises.h aplicarFiltro.h binarizarImagen.h analizarPropiedad.h escribirResultados.h
 ejemplo_source = $(ejemplo_headers:.h=.c) main.c
 ejemplo_objects = $(ejemplo_source:.c=.o)
 
