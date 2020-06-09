@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <math.h>
-#include "escribirResultados.h"
+#include "Etapa6.h"
 void clasificar(unsigned char ** matrizGrayBinarizada,int alto,int ancho,int numeroImagen,int umbralClasificar,int ** resultadosDeClasificacion){
 	int cantidadDePixelesNegros=0;
 	int porcentajeDePixelesNegros;
@@ -13,7 +12,7 @@ void clasificar(unsigned char ** matrizGrayBinarizada,int alto,int ancho,int num
 			}
 		}
 	}
-	porcentajeDePixelesNegros=(int)round(((double)cantidadDePixelesNegros/(double)(alto * ancho))*100.0);
+	porcentajeDePixelesNegros=(int)(((double)cantidadDePixelesNegros/(double)(alto * ancho))*100.0);
 	printf("%d\n",porcentajeDePixelesNegros);
 	escribirImagen(alto,ancho,numeroImagen,matrizGrayBinarizada);
 	if(porcentajeDePixelesNegros>=umbralClasificar){

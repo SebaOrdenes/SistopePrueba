@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <jpeglib.h>
-#include "convertirImagenAEscalaDeGrises.h"
+#include "Etapa2.h"
 
 //Entradas:
 //Funcionamiento:

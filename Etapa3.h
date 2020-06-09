@@ -1,5 +1,5 @@
-#ifndef APLICARFILTRO_H
-#define APLICARFILTRO_H
+#ifndef ETAPA3_H
+#define ETAPA3_H
 void validar(char num[], int cont);
 int* leerMascara(char*nombreMascara, int* numeros);
 void applyFilter(unsigned char **MatrizGray, char*nombreArchivoMascara,int alto,int ancho,int numreroImagen,int umbralBinarizar,int umbralClasificar,int ** resultadosDeClasificacion);
