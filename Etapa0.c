@@ -53,10 +53,21 @@ void recibirArgumentos(int argc,char* argv[],int * cantidadDeImagenes,int * umbr
 			case 'u':
 					(*umbralParaBinarizarLaImagen)= strtol(optarg, &numeroAux,10);
 					verificarSiEsNumeroEntero(numeroAux,*umbralParaBinarizarLaImagen,'u');
+					if(*umbralParaBinarizarLaImagen>255){
+						printf("Umbral sobrepasado. ");
+						exit(EXIT_FAILURE);
+					}
 					break;
+					
 			case 'n':
 					(*umbralParaClasificacion)= strtol(optarg, &numeroAux,10);
 					verificarSiEsNumeroEntero(numeroAux,*umbralParaClasificacion,'n');
+					if ( *umbralParaClasificacion > 100)
+					{
+						printf("Umbral sobrepasado. ");
+						exit(EXIT_FAILURE);
+					}
+					
 					break;
 			case 'm':
 					
