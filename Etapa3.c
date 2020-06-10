@@ -155,7 +155,7 @@ void applyFilter(unsigned char **MatrizGray, char*nombreArchivoMascara,int alto,
                                     // El tipo de dato unsigned char almacena "numeros" de 0 al 255.
     matrizGrayConvolucionada=(unsigned char **)malloc(alto*sizeof(unsigned char *));
     for(int i=0;i<alto;i++){
-        matrizGrayConvolucionada[i]=(unsigned char *)malloc(ancho*sizeof(int));
+        matrizGrayConvolucionada[i]=(unsigned char *)malloc(ancho*sizeof(unsigned char));
     }
     int lista[9];
     int * numerosMatriz;

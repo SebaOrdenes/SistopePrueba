@@ -12,8 +12,13 @@ void clasificar(unsigned char ** matrizGrayBinarizada,int alto,int ancho,int num
 			}
 		}
 	}
+<<<<<<< HEAD
 	porcentajeDePixelesNegros=(int)(((double)cantidadDePixelesNegros/(double)(alto * ancho))*100.0);
 	// printf("%d\n",porcentajeDePixelesNegros);
+=======
+	porcentajeDePixelesNegros=(((double)cantidadDePixelesNegros/(double)(alto * ancho))*100.0);
+	printf("%d\n",porcentajeDePixelesNegros);
+>>>>>>> master
 	escribirImagen(alto,ancho,numeroImagen,matrizGrayBinarizada);
 	if(porcentajeDePixelesNegros>=umbralClasificar){
 		(*resultadosDeClasificacion)[numeroImagen-1]=1;

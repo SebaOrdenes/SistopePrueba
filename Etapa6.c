@@ -9,7 +9,7 @@ void escribirImagen(int alto,int ancho,int numeroImagen,unsigned char ** matrizG
     struct jpeg_error_mgr jerr;
     char nombre[20];
     unsigned char * matrizGrayBinarizadaAux;
-    matrizGrayBinarizadaAux=(unsigned char *)malloc(alto*ancho*3*sizeof(unsigned char));
+    matrizGrayBinarizadaAux=(unsigned char *)malloc(alto*ancho*sizeof(unsigned char));
     sprintf(nombre,"salida_%i.jpg",numeroImagen);
     int contador=0;
     for(int i=0;i<alto;i++){
