@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 //Entradas:Char *
-//Funcionamiento:funcion que verifica si el elemento ingresado es un numero
+//Funcionamiento:funcion que verifica si el elemento ingresado es un numero entero
 //Salidas: int
 int esUnNumero(char * cadenaDeTexto){
 	int i=1;
@@ -54,7 +54,7 @@ void recibirArgumentos(int argc,char* argv[],int * cantidadDeImagenes,int * umbr
 					(*umbralParaBinarizarLaImagen)= strtol(optarg, &numeroAux,10);
 					verificarSiEsNumeroEntero(numeroAux,*umbralParaBinarizarLaImagen,'u');
 					if(*umbralParaBinarizarLaImagen>255){
-						printf("Umbral sobrepasado. ");
+						printf("Umbral para binarizar (Rango: [0 a 255]) sobrepasado.\n");
 						exit(EXIT_FAILURE);
 					}
 					break;
@@ -64,7 +64,7 @@ void recibirArgumentos(int argc,char* argv[],int * cantidadDeImagenes,int * umbr
 					verificarSiEsNumeroEntero(numeroAux,*umbralParaClasificacion,'n');
 					if ( *umbralParaClasificacion > 100)
 					{
-						printf("Umbral sobrepasado. ");
+						printf("Umbral para clasificar (Rango: [0 a 100]) sobrepasado.\n");
 						exit(EXIT_FAILURE);
 					}
 					
@@ -73,7 +73,7 @@ void recibirArgumentos(int argc,char* argv[],int * cantidadDeImagenes,int * umbr
 					
 					archivo=fopen(optarg,"r");
 					if(archivo==NULL){
-						printf("El archivo no existe en el directorio.\n");
+						printf("El archivo %s no existe en el directorio.\n", optarg);
 						exit(EXIT_FAILURE);
 					}
 					fclose(archivo);
