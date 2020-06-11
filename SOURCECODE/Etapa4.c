@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "Etapa5.h"
+#include "../INCLUDE/Etapa5.h"
 //ENTRADA:unsigned char**, int, int, int, int, int, int**
 //FUNCIONAMIENTO: función que binariza la matriz gray ya convolucionada.
 //SALIDA:no aplica

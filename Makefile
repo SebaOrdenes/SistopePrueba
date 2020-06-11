@@ -1,9 +1,8 @@
 ejemplo_out = pipeline
 
-ejemplo_headers = $(wildcard *.h)
-ejemplo_source = $(ejemplo_headers:.h=.c) main.c
+ejemplo_headers = $(wildcard ./INCLUDE/*.h)
+ejemplo_source =$(wildcard ./SOURCECODE/*.c) 
 ejemplo_objects = $(ejemplo_source:.c=.o)
-
 
 CC=gcc
 CFLAGS = -Wall 
@@ -21,7 +20,6 @@ $(objects):
 
 $depends: $(ejemplo_source) $(ejemplo_headers)
 	@$(CC) -MM $(ejemplo_source) > $@
-
 clean:
 	$(RM) $(ejemplo_out) $(ejemplo_objects) $(zipfile) $(depends)
 

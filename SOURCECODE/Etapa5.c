@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "Etapa6.h"
+#include "../INCLUDE/Etapa6.h"
 //ENTRADA: unsigned char**, int, int, int, int ,int int**
 //FUNCIONAMIENTO: funcion que a partir que sirve para clasificar la imagen una vez convolucionada, para saber si aplica o no como nearly black
 //SALIDA: no aplica

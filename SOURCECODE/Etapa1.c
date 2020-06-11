@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <jpeglib.h>
-#include "Etapa2.h"
+#include "../INCLUDE/Etapa2.h"
 
 //Entradas:int, int, int, int , char*
 //Funcionamiento:funcion principal que lee las imagenes ingresadas luego de ejecutar el pipeline y la convierte a matriz rgb.

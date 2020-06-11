@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "Etapa0.h"
-#include "Etapa1.h"
+#include "../INCLUDE/Etapa0.h"
+#include "../INCLUDE/Etapa1.h"
+
 
 int main(int argc, char * argv[]){
 	int cantidadDeImagenes, umbralParaBinarizarLaImagen,umbralParaClasificacion,bandera;

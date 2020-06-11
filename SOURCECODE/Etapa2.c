@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "Etapa3.h"
+#include "../INCLUDE/Etapa3.h"
 
 //Entradas:int, int, unsigned char***, int, int, int, char*, int**
 //Funcionamiento: funcion principal que transforma la matriz rgb de la imagen a matriz gray

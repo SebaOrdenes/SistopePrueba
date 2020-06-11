@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <string.h>
-#include "Etapa4.h"
+#include "../INCLUDE/Etapa4.h"
 //ENTRADA: char[], int
 //FUNCIONAMIENTO: funcion que valida, segun la posicion del buffer, si es un numero o no.
 //SALIDA: no aplica
