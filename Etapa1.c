@@ -8,9 +8,9 @@
 #include <jpeglib.h>
 #include "Etapa2.h"
 
-//Entradas:
-//Funcionamiento:
-//Salidas:
+//Entradas:int, int, int, int , char*
+//Funcionamiento:funcion principal que lee las imagenes ingresadas luego de ejecutar el pipeline y la convierte a matriz rgb.
+//Salidas: no aplica
 void leerImagenes(int cantidadDeImagenes,int umbralParaBinarizarLaImgene,int umbralParaClasificacion,int bandera, char * nombreMascara) {
   unsigned char r, g, b;
   int ancho, alto,contador;
@@ -80,10 +80,10 @@ void leerImagenes(int cantidadDeImagenes,int umbralParaBinarizarLaImgene,int umb
   		//printf("%d\n",resultadosDeLaClasificacion[z]);
 		if (resultadosDeLaClasificacion[z]== -1)
 		{
-			printf("|   Imagen_%d    |       No       |\n",z+1);
+			printf("|   imagen_%d    |       No       |\n",z+1);
 		}
 		else {
-			printf("|   Imagen_%d    |       Yes      |\n",z+1);
+			printf("|   imagen_%d    |       Yes      |\n",z+1);
 		}
 		
   }

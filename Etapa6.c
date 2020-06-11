@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <jpeglib.h>
+//ENTRADA:int, int, int, unsigned char
+//FUNCIONAMIENTO: funcion que escribe una nueva imagen para la salida del programa  
+//SALIDA:no aplica.
 
 void escribirImagen(int alto,int ancho,int numeroImagen,unsigned char ** matrizGrayBinarizada)
 {
@@ -18,7 +21,8 @@ void escribirImagen(int alto,int ancho,int numeroImagen,unsigned char ** matrizG
             contador++;
         }
     }
-    /* this is a pointer to one row of image data */
+  
+/* este es un puntero a una fila de datos de imagen */
     JSAMPROW row_pointer[1];
     FILE *outfile = fopen( nombre, "wb" );
    
@@ -31,25 +35,26 @@ void escribirImagen(int alto,int ancho,int numeroImagen,unsigned char ** matrizG
     jpeg_create_compress(&cinfo);
     jpeg_stdio_dest(&cinfo, outfile);
 
-    /* Setting the parameters of the output file here */
+  
+/* Configuración de los parámetros del archivo de salida aquí */
     cinfo.image_width = ancho;
     cinfo.image_height = alto;
     cinfo.input_components = 1;
     cinfo.in_color_space = JCS_GRAYSCALE; //img->color_space;
-    /* default compression parameters, we shouldn't be worried about these */
+    /* parámetros de compresión predeterminados, no debemos preocuparnos por esto */
     jpeg_set_defaults( &cinfo );
-    /* Now do the compression .. */
+   
     jpeg_start_compress( &cinfo, TRUE );
-    /* like reading a file, this time write one row at a time */
+    /* como leer un archivo, esta vez escriba una fila a la vez */
     while( cinfo.next_scanline < cinfo.image_height )
     {
         row_pointer[0]= &matrizGrayBinarizadaAux[ cinfo.next_scanline * cinfo.image_width*cinfo.input_components];
         jpeg_write_scanlines( &cinfo, row_pointer, 1 );
     }
-    /* similar to read file, clean up after we're done compressing */
+    /* similar a leer el archivo, limpiar después de que hayamos terminado de comprimir */
     jpeg_finish_compress( &cinfo );
     jpeg_destroy_compress( &cinfo );
     fclose( outfile );
-    /* success code is 1! */
+   
     
 }

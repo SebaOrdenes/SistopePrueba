@@ -3,9 +3,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
-//Entradas:
-//Funcionamiento:
-//Salidas:
+//Entradas:Char *
+//Funcionamiento:funcion que verifica si el elemento ingresado es un numero
+//Salidas: int
 int esUnNumero(char * cadenaDeTexto){
 	int i=1;
 	for(int j=0; j<strlen(cadenaDeTexto);j++){
@@ -17,9 +17,9 @@ int esUnNumero(char * cadenaDeTexto){
 	return i;
 }
 
-//Entradas:
-//Funcionamiento:
-//Salidas:
+//Entradas:char*, int* , char
+//Funcionamiento: funcion que verifica si la cadena de texto corresponde a un numero
+//Salidas: no aplica.
 void verificarSiEsNumeroEntero( char* numeroAux,int numero,char simbolo){
 	if(esUnNumero(numeroAux)==0){
 		printf("Se ingreso algo distinto a un número entero.\n");
@@ -32,9 +32,9 @@ void verificarSiEsNumeroEntero( char* numeroAux,int numero,char simbolo){
 		exit(EXIT_FAILURE);
 	}
 }
-//Entradas:
-//Funcionamiento:
-//Salidas:
+//Entradas:int, char*, in*, int*, int*, char*, int*
+//Funcionamiento: funcion principal que recibe los argumentos de entrada cuando se invoca el pipeline
+//Salidas: no aplica
 void recibirArgumentos(int argc,char* argv[],int * cantidadDeImagenes,int * umbralParaBinarizarLaImagen, int * umbralParaClasificacion, char * nombreArchivoMascara,int * bandera){
 	char *numeroAux;
 	int opt;

@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "Etapa5.h"
+//ENTRADA:unsigned char**, int, int, int, int, int, int**
+//FUNCIONAMIENTO: función que binariza la matriz gray ya convolucionada.
+//SALIDA:no aplica
 void binarizar(unsigned char ** matrizGrayConvolucionada,int alto,int ancho,int numeroImagen,int umbralBinarizar,int umbralClasificar,int **resultadosDeClasificacion){
 	unsigned char ** matrizGrayBinarizada;
 	matrizGrayBinarizada=(unsigned char**)malloc(alto*sizeof(unsigned char*));

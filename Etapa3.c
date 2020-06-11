@@ -4,8 +4,9 @@
 #include <ctype.h>
 #include <string.h>
 #include "Etapa4.h"
-
+//ENTRADA: char[], int
 //FUNCIONAMIENTO: funcion que valida, segun la posicion del buffer, si es un numero o no.
+//SALIDA: no aplica
 void validar(char num[], int cont){
     for (int i = cont; i < strlen(num); i++)
     {
@@ -22,9 +23,9 @@ void validar(char num[], int cont){
 
 
 
-//ENTRADA
+//ENTRADA:char*, int*
 //FUNCIONAMIENTO: funcion que lee la mascara y retorna un arreglo de 9 posiciones
-//SALIDA
+//SALIDA: arreglo de int
 
 int* leerMascara(char*nombreMascara, int*numeros){
     FILE *fp;
@@ -64,7 +65,9 @@ int* leerMascara(char*nombreMascara, int*numeros){
     return(numeros);
 } 
 
-//funcion que, en base a una posicion x e y dada, retorna los valores de las 8 posiciones colindantes a esa posicion
+//ENTRADA:int, int, unsigned char**, int*, int. int
+//FUNCIONAMIENTO:funcion que, en base a una posicion x e y dada, retorna los valores de las 8 posiciones colindantes a esa posicion
+//SALIDA: puntero a un arreglo de int
 int* getNumeros(int posX, int posY,unsigned char** matrizGray,int* lista, int altoMatriz,int anchoMatriz){
     int tempX;
     int tempY;
@@ -127,9 +130,10 @@ int* getNumeros(int posX, int posY,unsigned char** matrizGray,int* lista, int al
 
 }
 
-
-//funcion que calcula el numero a poner en la nueva matriz una vez aplicada la mascara, el cual habra que posicionalo en las mismas
+//ENTRADA:int*, int*
+//FUNCIONAMIENTO : funcion que calcula el numero a poner en la nueva matriz una vez aplicada la mascara, el cual habra que posicionalo en las mismas
 //coordenadas x e y iniciales
+//SALIDA: int
 int resultadoMascara(int*numeroMatriz, int*numerosMascara){
     int contador=0;
     for (int i = 0; i < 9; i++)
@@ -146,7 +150,9 @@ int resultadoMascara(int*numeroMatriz, int*numerosMascara){
 
 
 
-
+//ENTRADA: char**, char*, int, int, int, int, int, int,int*
+//FUNCIONAMIENTO: funcion principal que aplica el filtro entregado por la máscara, en la matriz
+//SALIDA: no aplica
 
 void applyFilter(unsigned char **MatrizGray, char*nombreArchivoMascara,int alto,int ancho,int numreroImagen,int umbralBinarizar,int umbralClasificar,int ** resultadosDeClasificacion){
 	int numeros[9];

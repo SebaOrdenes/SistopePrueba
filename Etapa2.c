@@ -3,9 +3,9 @@
 #include <unistd.h>
 #include "Etapa3.h"
 
-//Entradas:
-//Funcionamiento:
-//Salidas:
+//Entradas:int, int, unsigned char***, int, int, int, char*, int**
+//Funcionamiento: funcion principal que transforma la matriz rgb de la imagen a matriz gray
+//Salidas:no aplica 
 void rgbAgray(int alto,int ancho,unsigned char ***pixeles,int numeroImagen,int umbralBinarizar,int umbrarClasificar,char* nombreArchivoMascara,int ** resultadosDeClasificacion){
 	unsigned char ** gray;
 	int i=0;
