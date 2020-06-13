@@ -157,8 +157,7 @@ int resultadoMascara(int*numeroMatriz, int*numerosMascara){
 void applyFilter(unsigned char **MatrizGray, char*nombreArchivoMascara,int alto,int ancho,int numreroImagen,int umbralBinarizar,int umbralClasificar,int ** resultadosDeClasificacion){
 	int numeros[9];
     int *arreglo= leerMascara(nombreArchivoMascara,numeros);
-    unsigned char ** matrizGrayConvolucionada; // se utiliza una matriz de enteros porque se necesita almacenar numeros negativos, al igual que numeros mayores a 255.
-                                    // El tipo de dato unsigned char almacena "numeros" de 0 al 255.
+    unsigned char ** matrizGrayConvolucionada;
     matrizGrayConvolucionada=(unsigned char **)malloc(alto*sizeof(unsigned char *));
     for(int i=0;i<alto;i++){
         matrizGrayConvolucionada[i]=(unsigned char *)malloc(ancho*sizeof(unsigned char));

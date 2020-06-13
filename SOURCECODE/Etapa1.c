@@ -72,10 +72,10 @@ void leerImagenes(int cantidadDeImagenes,int umbralParaBinarizarLaImgene,int umb
   	}
   	free(pixeles);
   }
-
+  if(bandera==1){
 	printf("|    image      |  nearly black  |\n");
 	printf("|---------------|----------------|\n");
-
+  
   for(int z=0;z<cantidadDeImagenes;z++){
   		//printf("%d\n",resultadosDeLaClasificacion[z]);
 		if (resultadosDeLaClasificacion[z]== -1)
@@ -86,6 +86,7 @@ void leerImagenes(int cantidadDeImagenes,int umbralParaBinarizarLaImgene,int umb
 			printf("|   imagen_%d    |       Yes      |\n",z+1);
 		}
 		
+  }
   }
   free(resultadosDeLaClasificacion);
 
