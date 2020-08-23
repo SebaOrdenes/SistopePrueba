@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
+#include "../INCLUDE/Etapa2.h"
 //Entradas:int, int, unsigned char **, unsigned char ***
 //Funcionamiento: funcion principal que transforma la matriz rgb de la imagen a matriz gray
 //Salidas:no aplica 
@@ -18,3 +18,5 @@ void rgbAgray(int alto,int ancho,unsigned char ** pixeles,unsigned char *** matr
 		}
 	}
 }
+
+int main(){printf("Hola Mundo\n");}

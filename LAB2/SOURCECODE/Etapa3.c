@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <string.h>
-#include "../INCLUDE/Etapa4.h"
+#include "../INCLUDE/Etapa3.h"
 
 //ENTRADA: char[], int
 //FUNCIONAMIENTO: funcion que valida, segun la posicion del buffer, si es un numero o no.
@@ -172,3 +172,5 @@ void applyFilter(unsigned char ** MatrizGray,unsigned char *** matrizGrayConvolu
         
     }
 }
+
+int main(){printf("Hola Mundo\n");}

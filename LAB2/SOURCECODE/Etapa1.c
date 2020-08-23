@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <jpeglib.h>
-
+#include "../INCLUDE/Etapa1.h"
 
 //Entradas:unsigned char ***,int *, int *, int
 //Funcionamiento:funcion principal que lee las imagenes ingresadas luego de ejecutar el pipeline y la convierte a matriz rgb.
@@ -64,3 +64,5 @@ void leerImagenes(unsigned char *** pixeles,int* ancho,int * alto,int i) {
   (void)jpeg_destroy_decompress(&cinfo);
   
 }
+
+int main(){printf("Hola Mundo\n");}

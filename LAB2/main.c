@@ -3,6 +3,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
+
+
+
 //Entradas:Char *
 //Funcionamiento:funcion que verifica si el elemento ingresado es un numero entero
 //Salidas: int
@@ -88,4 +91,38 @@ void recibirArgumentos(int argc,char* argv[],int * cantidadDeImagenes,int * umbr
 					break;
 		}
 	}
+}
+
+
+
+
+
+//ENTRADA:int, int,*, int 
+//FUNCIONAMIENTO: imprime los resultados de la clasificación de imagenes por pantalla 
+//SALIDA:no aplica.
+void imprimirResultados(int * resultadosDeLaClasificacion,int cantidadDeImagenes){
+	printf("|    image      |  nearly black  |\n");
+	printf("|---------------|----------------|\n");
+	for(int z=0;z<cantidadDeImagenes;z++){
+  		if (resultadosDeLaClasificacion[z]== -1){
+			printf("|   imagen_%d    |       No       |\n",z+1);
+		}
+		else {
+			printf("|   imagen_%d    |       Yes      |\n",z+1);
+		}
+	}
+}
+
+int main(int argc, char * argv[]){
+	int cantidadDeImagenes, umbralParaBinarizarLaImagen,umbralParaClasificacion,bandera;
+	int *resultadosDeLaClasificacion;
+	char nombreArchivoMascara[100];
+	bandera=0;
+	recibirArgumentos(argc,argv,&cantidadDeImagenes,&umbralParaBinarizarLaImagen,&umbralParaClasificacion,nombreArchivoMascara,&bandera);//Etapa0
+	resultadosDeLaClasificacion=(int *)malloc(cantidadDeImagenes*sizeof(int));
+	if(bandera==1){
+  		imprimirResultados(resultadosDeLaClasificacion,cantidadDeImagenes);
+	}
+	free(resultadosDeLaClasificacion);
+	return 0;
 }

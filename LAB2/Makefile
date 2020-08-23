@@ -1,8 +1,7 @@
 ejemplo_out = pipeline
-
 ejemplo_headers = $(wildcard ./INCLUDE/*.h)
 ejemplo_source =$(wildcard ./SOURCECODE/*.c) 
-ejemplo_objects = $(ejemplo_source:.c=.o)
+ejemplo_objects = $(ejemplo_source:.c=.out)
 
 CC=gcc
 CFLAGS = -Wall 
@@ -10,13 +9,17 @@ LIBS = -lm
 JPEG = -ljpeg
 depends = .depends
 
+
 build: $(ejemplo_out)
+build: $(ejemplo_objects)
 
-$(ejemplo_out) : $(ejemplo_objects)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS) $(JPEG)
+$(ejemplo_out):
+	$(CC) $(CFLAGS) -o $@ main.c $(JPEG)
 
-$(objects):
-	$(CC) $(CFLAGS) -c -o $@ $*.c
+$(ejemplo_objects) : 
+	$(CC) $(CFLAGS) -o $@ $*.c $(JPEG)
+
+
 
 $depends: $(ejemplo_source) $(ejemplo_headers)
 	@$(CC) -MM $(ejemplo_source) > $@

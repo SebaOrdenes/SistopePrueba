@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <jpeglib.h>
-
+#include "../INCLUDE/Etapa6.h"
 //ENTRADA:int, int, int, unsigned char
 //FUNCIONAMIENTO: funcion que escribe una nueva imagen para la salida del programa  
 //SALIDA:no aplica.
@@ -58,3 +58,6 @@ void escribirImagen(int alto,int ancho,int numeroImagen,unsigned char ** matrizG
    
     
 }
+
+
+int main(){printf("Hola Mundo\n");}

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "../INCLUDE/Etapa4.h"
 
 //ENTRADA:unsigned char**, unsigned char *** , int , int 
 //FUNCIONAMIENTO: función que binariza la matriz gray ya convolucionada.
@@ -21,3 +22,4 @@ void binarizar(unsigned char ** matrizGrayConvolucionada,unsigned char *** matri
 		}
 	}
 }
+int main(){printf("Hola Mundo\n");}

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
+#include "../INCLUDE/Etapa5.h"
 //ENTRADA: unsigned char**, int, int, int, int ,int int**
 //FUNCIONAMIENTO: funcion que a partir que sirve para clasificar la imagen una vez convolucionada, para saber si aplica o no como nearly black
 //SALIDA: no aplica
@@ -23,3 +23,5 @@ void clasificar(unsigned char ** matrizGrayBinarizada,int alto,int ancho,int num
 		(*resultadosDeClasificacion)[numeroImagen-1]=-1;
 	}
 }
+
+int main(){printf("Hola Mundo\n");}
