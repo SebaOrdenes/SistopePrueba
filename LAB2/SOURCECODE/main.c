@@ -38,8 +38,9 @@ void verificarSiEsNumeroEntero( char* numeroAux,int numero,char simbolo){
 //Entradas:int, char*, in*, int*, int*, char*, int*
 //Funcionamiento: funcion principal que recibe los argumentos de entrada cuando se invoca el pipeline
 //Salidas: no aplica
-void recibirArgumentos(int argc,char* argv[],int * cantidadDeImagenes,int * umbralParaBinarizarLaImagen, int * umbralParaClasificacion, char * nombreArchivoMascara,int * bandera){
+void recibirArgumentos(int argc,char* argv[], char *  i,char * j, char * k, char * nombreArchivoMascara,char * bandera){
 	char *numeroAux;
+	int cantidadDeImagenes,umbralParaBinarizarLaImagen,umbralParaClasificacion;
 	int opt;
 	FILE *archivo;
 	if(argc<9){
@@ -50,27 +51,29 @@ void recibirArgumentos(int argc,char* argv[],int * cantidadDeImagenes,int * umbr
 	while((opt = getopt(argc, argv, "bm:n:u:c:")) != -1){
 		switch(opt){
 			case 'c':
-					(*cantidadDeImagenes)= strtol(optarg, &numeroAux,10);
-					verificarSiEsNumeroEntero(numeroAux,*cantidadDeImagenes,'c');
+					cantidadDeImagenes= strtol(optarg, &numeroAux,10);
+					verificarSiEsNumeroEntero(numeroAux,cantidadDeImagenes,'c');
+					strcpy(i,optarg);
 					break;
 			case 'u':
-					(*umbralParaBinarizarLaImagen)= strtol(optarg, &numeroAux,10);
-					verificarSiEsNumeroEntero(numeroAux,*umbralParaBinarizarLaImagen,'u');
-					if(*umbralParaBinarizarLaImagen>255){
+					umbralParaBinarizarLaImagen= strtol(optarg, &numeroAux,10);
+					verificarSiEsNumeroEntero(numeroAux,umbralParaBinarizarLaImagen,'u');
+					if(umbralParaBinarizarLaImagen>255){
 						printf("Umbral para binarizar (Rango: [0 a 255]) sobrepasado.\n");
 						exit(EXIT_FAILURE);
 					}
+					strcpy(j,optarg);
 					break;
 					
 			case 'n':
-					(*umbralParaClasificacion)= strtol(optarg, &numeroAux,10);
-					verificarSiEsNumeroEntero(numeroAux,*umbralParaClasificacion,'n');
-					if ( *umbralParaClasificacion > 100)
+					umbralParaClasificacion= strtol(optarg, &numeroAux,10);
+					verificarSiEsNumeroEntero(numeroAux,umbralParaClasificacion,'n');
+					if ( umbralParaClasificacion > 100)
 					{
 						printf("Umbral para clasificar (Rango: [0 a 100]) sobrepasado.\n");
 						exit(EXIT_FAILURE);
 					}
-					
+					strcpy(k,optarg);
 					break;
 			case 'm':
 					
@@ -83,7 +86,7 @@ void recibirArgumentos(int argc,char* argv[],int * cantidadDeImagenes,int * umbr
 					strcpy(nombreArchivoMascara,optarg);
 					break;
 			case 'b':
-					(*bandera)=1;
+					strcpy(bandera,"1");
 					break;
 			default:
 		            fprintf(stderr, "Uso correcto: %s [-c numero entero] [-u numero entero] [-n numero entero] [-m cadena de texto][-b]\n",argv[0]);
@@ -114,15 +117,8 @@ void imprimirResultados(int * resultadosDeLaClasificacion,int cantidadDeImagenes
 }
 
 int main(int argc, char * argv[]){
-	int cantidadDeImagenes, umbralParaBinarizarLaImagen,umbralParaClasificacion,bandera;
-	int *resultadosDeLaClasificacion;
+	char cantidadDeImagenes[100], umbralParaBinarizarLaImagen[100],umbralParaClasificacion[100],bandera[100];
 	char nombreArchivoMascara[100];
-	bandera=0;
-	recibirArgumentos(argc,argv,&cantidadDeImagenes,&umbralParaBinarizarLaImagen,&umbralParaClasificacion,nombreArchivoMascara,&bandera);//Etapa0
-	resultadosDeLaClasificacion=(int *)malloc(cantidadDeImagenes*sizeof(int));
-	if(bandera==1){
-  		imprimirResultados(resultadosDeLaClasificacion,cantidadDeImagenes);
-	}
-	free(resultadosDeLaClasificacion);
-	return 0;
+	recibirArgumentos(argc,argv,cantidadDeImagenes,umbralParaBinarizarLaImagen,umbralParaClasificacion,nombreArchivoMascara,bandera);//Etapa0
+	printf("%s %s %s %s %s\n",cantidadDeImagenes,umbralParaClasificacion,umbralParaBinarizarLaImagen,bandera,nombreArchivoMascara);
 }

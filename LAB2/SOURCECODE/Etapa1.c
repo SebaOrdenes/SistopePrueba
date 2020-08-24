@@ -10,7 +10,7 @@
 
 //Entradas:unsigned char ***,int *, int *, int
 //Funcionamiento:funcion principal que lee las imagenes ingresadas luego de ejecutar el pipeline y la convierte a matriz rgb.
-//Salidas: no aplica
+//Salidas: no aplic
 void leerImagenes(unsigned char *** pixeles,int* ancho,int * alto,int i) {
   unsigned char r, g, b;
   int contador;
