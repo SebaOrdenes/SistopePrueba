@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
@@ -117,8 +119,40 @@ void imprimirResultados(int * resultadosDeLaClasificacion,int cantidadDeImagenes
 }
 
 int main(int argc, char * argv[]){
+	int tuberia[2];
+	pipe(tuberia);
 	char cantidadDeImagenes[100], umbralParaBinarizarLaImagen[100],umbralParaClasificacion[100],bandera[100];
 	char nombreArchivoMascara[100];
+	strcpy(bandera,"0");
 	recibirArgumentos(argc,argv,cantidadDeImagenes,umbralParaBinarizarLaImagen,umbralParaClasificacion,nombreArchivoMascara,bandera);//Etapa0
-	printf("%s %s %s %s %s\n",cantidadDeImagenes,umbralParaClasificacion,umbralParaBinarizarLaImagen,bandera,nombreArchivoMascara);
+	pid_t pid = fork();
+	if(pid < 0){
+		printf("Fallo la creación del hijo\n");
+		exit(EXIT_FAILURE);
+	}
+	else if(pid == 0){
+		dup2(tuberia[0],STDIN_FILENO);
+		close(tuberia[1]);
+		close(tuberia[0]);
+		char *args[] = {"Etapa1.out",cantidadDeImagenes,umbralParaBinarizarLaImagen,umbralParaClasificacion,bandera,nombreArchivoMascara,NULL};
+		execvp("SOURCECODE/Etapa1.out",args);
+	}
+	else{
+		dup2(tuberia[1],STDOUT_FILENO);
+		close(tuberia[0]);
+		close(tuberia[1]);
+		int imagen[1];
+		int i = 1;
+		while(i <= atoi(cantidadDeImagenes)){
+			imagen[0]=i;
+			write(STDOUT_FILENO,imagen,1*sizeof(int));
+			i++;
+		}
+		
+		printf("hola mundo\n");
+
+	}
+	printf("Hola mundo\n");
+	wait(NULL);
+	return 0;
 }

@@ -19,4 +19,12 @@ void rgbAgray(int alto,int ancho,unsigned char ** pixeles,unsigned char *** matr
 	}
 }
 
-int main(){printf("Hola Mundo\n");}
+int main(int argc , char * argv[]){
+	for(int i = 1;i<=atoi(argv[1]);i++){
+		int dimensiones[2];
+		read(STDIN_FILENO,dimensiones,2*sizeof(int));
+		unsigned char pixeles[dimensiones[0]][dimensiones[1]];
+		read(STDIN_FILENO,pixeles,dimensiones[0]*dimensiones[1]*sizeof(int));
+		printf("%d %d\n",dimensiones[0],dimensiones[1]);
+	}
+}
