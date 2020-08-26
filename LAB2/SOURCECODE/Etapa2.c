@@ -24,7 +24,8 @@ int main(int argc , char * argv[]){
 		int dimensiones[2];
 		read(STDIN_FILENO,dimensiones,2*sizeof(int));
 		unsigned char pixeles[dimensiones[0]][dimensiones[1]];
-		read(STDIN_FILENO,pixeles,dimensiones[0]*dimensiones[1]*sizeof(int));
-		printf("%d %d\n",dimensiones[0],dimensiones[1]);
+		read(STDIN_FILENO,pixeles,dimensiones[0]*dimensiones[1]*sizeof(unsigned char));
+		printf("%d %d\n", dimensiones[0],dimensiones[1]);
 	}
+	return 0;
 }
