@@ -20,12 +20,28 @@ void rgbAgray(int alto,int ancho,unsigned char ** pixeles,unsigned char *** matr
 }
 
 int main(int argc , char * argv[]){
+	unsigned char ** matrizPixeles;
 	for(int i = 1;i<=atoi(argv[1]);i++){
 		int dimensiones[2];
 		read(STDIN_FILENO,dimensiones,2*sizeof(int));
-		unsigned char pixeles[dimensiones[0]][dimensiones[1]];
-		read(STDIN_FILENO,pixeles,dimensiones[0]*dimensiones[1]*sizeof(unsigned char));
-		printf("%d %d\n", dimensiones[0],dimensiones[1]);
+		fflush(stdin);
+		printf("%d %d\n",dimensiones[0],dimensiones[1]);
+		matrizPixeles=(unsigned char**)malloc(dimensiones[0]*sizeof(unsigned char *));
+		for(int j=0;j<dimensiones[0];j++){
+			matrizPixeles[j]=(unsigned char*)malloc(dimensiones[1]*sizeof(unsigned char));
+		}
+		unsigned char pixeles[3];
+		for(int j =0;j<dimensiones[0];j++){
+			read(STDIN_FILENO,pixeles,3*sizeof(unsigned char));
+			matrizPixeles[j][0]=pixeles[0];
+			matrizPixeles[j][1]=pixeles[1];
+			matrizPixeles[j][2]=pixeles[2];
+			fflush(stdin);
+		}
+		for(int z=0;z<dimensiones[0];z++){ 
+			printf("%d %d %d\n",matrizPixeles[z][0],matrizPixeles[z][1],matrizPixeles[z][2]);
+		}
+
 	}
 	return 0;
 }

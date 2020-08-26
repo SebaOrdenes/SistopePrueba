@@ -12,8 +12,7 @@
 //Entradas:unsigned char ***,int *, int *, int
 //Funcionamiento:funcion principal que lee las imagenes ingresadas luego de ejecutar el pipeline y la convierte a matriz rgb.
 //Salidas: no aplic
-unsigned char ** leerImagenes(int* ancho,int * alto,int i) {
-  unsigned char ** pixeles;
+void leerImagenes(unsigned char *** pixeles,int* ancho,int * alto,int i) {
   unsigned char r, g, b;
   int contador;
   char nombre[20];
@@ -35,9 +34,9 @@ unsigned char ** leerImagenes(int* ancho,int * alto,int i) {
   (void)jpeg_start_decompress(&cinfo);
   *ancho = cinfo.output_width;
   *alto = cinfo.output_height;
-  pixeles=(unsigned char**)malloc((*ancho)*(*alto)*sizeof(unsigned char*));
+  (*pixeles)=(unsigned char**)malloc((*ancho)*(*alto)*sizeof(unsigned char*));
   for(int j=0;j<((*ancho)*(*alto));j++){
-  	pixeles[j]=(unsigned char*)malloc(3*sizeof(unsigned char));
+  	(*pixeles)[j]=(unsigned char*)malloc(3*sizeof(unsigned char));
   }
 	row_stride = (*ancho) * cinfo.output_components;
     pJpegBuffer = (*cinfo.mem->alloc_sarray)
@@ -53,9 +52,9 @@ unsigned char ** leerImagenes(int* ancho,int * alto,int i) {
         	g = r;
         	b = r;
       		}
-      		pixeles[contador][0]=r;
-      		pixeles[contador][1]=g;
-      		pixeles[contador][2]=b;
+      		(*pixeles)[contador][0]=r;
+      		(*pixeles)[contador][1]=g;
+      		(*pixeles)[contador][2]=b;
       		contador++;
       		
     	}
@@ -64,7 +63,6 @@ unsigned char ** leerImagenes(int* ancho,int * alto,int i) {
   fclose(imagen);
   (void) jpeg_finish_decompress(&cinfo);
   (void)jpeg_destroy_decompress(&cinfo);
-  return pixeles;
   
 }
 //ENTRADA:iunsigned char **, int 
@@ -77,10 +75,12 @@ void liberarMemoriaMatriz(unsigned char ** matrizGenerica,int alto){
   free(matrizGenerica);
 }
 
+
 int main(int argc,char * argv[]){
   int alto,ancho;
   unsigned char ** pixelesAux;
-  /*int tuberia[2];
+  unsigned char pixeles[3];
+  int tuberia[2];
   pipe(tuberia);
   pid_t pid = fork();
   if(pid < 0){
@@ -97,38 +97,30 @@ int main(int argc,char * argv[]){
   else{
       dup2(tuberia[1],STDOUT_FILENO);
       close(tuberia[0]);
-      close(tuberia[1]);*/
+      close(tuberia[1]);
       int i=0;
       while(i < atoi(argv[1])){
         int imagen[1];
         read(STDIN_FILENO,imagen,1*sizeof(int));
-        pixelesAux=leerImagenes(&ancho,&alto,imagen[0]);
-        
-        int filas = ancho*alto;
-        int columnas = 3;
-        unsigned char pixeles[filas][columnas];
-        printf("%d %d %d %d\n",ancho,alto,filas,pixelesAux[0][0]);
-        
-        //int dimensiones[2];
-        //dimensiones[0] = filas;
-        //dimensiones[1] = 3;
-        
+        leerImagenes(&pixelesAux,&ancho,&alto,imagen[0]);
+        int filas = (alto)*(ancho);
+        int dimensiones[2];
+        dimensiones[0] = filas;
+        dimensiones[1] = 3;
+        write(STDOUT_FILENO,dimensiones,2*sizeof(int));
+        fflush(stdout);
         for(int j=0;j<filas;j++){
-          for(int k=0;k<columnas;k++){ 
-            pixeles[j][k]=pixelesAux[j][k];
-          }
+            pixeles[0]=pixelesAux[j][0];
+            pixeles[1]=pixelesAux[j][0];
+            pixeles[2]=pixelesAux[j][0];
+            write(STDOUT_FILENO,pixeles,3*sizeof(unsigned char));
+            fflush(stdout);
         }
-
-       
-        
-        //unsigned char pixelesAux[filas][3];
-        //write(STDOUT_FILENO,dimensiones,2*sizeof(int));
-        //write(STDOUT_FILENO,pixeles,filas*3*sizeof(unsigned char));
-        liberarMemoriaMatriz(pixelesAux,filas);
+        liberarMemoriaMatriz(pixelesAux,alto*ancho);
         i++;
       }
     
-  //}
+  }
   wait(NULL);
   return 0;
 }
