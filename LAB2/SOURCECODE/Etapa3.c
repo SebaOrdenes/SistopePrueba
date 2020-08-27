@@ -3,6 +3,9 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 #include "../INCLUDE/Etapa3.h"
 
 //ENTRADA: char[], int
@@ -174,26 +177,47 @@ void applyFilter(unsigned char ** MatrizGray,unsigned char *** matrizGrayConvolu
 }
 
 int main(int argc,char * argv[]){
-    unsigned char ** matrizGray
-    unsigned char ** matrizGrayConvolucionada;
-    for(int i=1;atoi(argv[1]);i++){
-         int dimensiones[4];
-        read(STDIN_FILENO,dimensiones,4*sizeof(int));
-        fflush(stdin);
-        matrizPixeles=(unsigned char**)malloc(dimensiones[0]*sizeof(unsigned char *));
-        for(int j=0;j<dimensiones[0];j++){
-            matrizPixeles[j]=(unsigned char*)malloc(dimensiones[1]*sizeof(unsigned char));
-        }
-        unsigned char pixeles[3];
-        for(int j =0;j<dimensiones[0];j++){
-            read(STDIN_FILENO,pixeles,3*sizeof(unsigned char));
-            matrizPixeles[j][0]=pixeles[0];
-            matrizPixeles[j][1]=pixeles[1];
-            matrizPixeles[j][2]=pixeles[2];
-            fflush(stdin);
-        }   
-
+    /*int tuberia[2];
+    pipe(tuberia);
+    pid_t pid =fork();
+    if(pid < 0){
+        printf("No se pudo crear el hijo\n");
+        exit(EXIT_FAILURE);
     }
+    else if(pid == 0){
+        dup2(tuberia[0],STDIN_FILENO);
+        close(tuberia[0]);
+        close(tuberia[1]);
+        char *args[] = {"Etapa4.out",argv[1],argv[2],argv[3],argv[4],argv[5],NULL};
+        execvp("SOURCECODE/Etapa4.out",args);
+    }
+    else{
+        dup2(tuberia[1],STDOUT_FILENO);
+        close(tuberia[0]);
+        close(tuberia[1]);*/
+        unsigned char ** matrizGray;
+        unsigned char ** matrizGrayConvolucionada;
+        for(int i=1;atoi(argv[1]);i++){
+            int dimensiones[2];
+            read(STDIN_FILENO,dimensiones,2*sizeof(int));
+            fflush(stdin);
+            matrizGray=(unsigned char**)malloc(dimensiones[0]*sizeof(unsigned char *));
+            for(int j=0;j<dimensiones[0];j++){
+                matrizGray[j]=(unsigned char*)malloc(dimensiones[1]*sizeof(unsigned char));
+            }
+            unsigned char filaDeLaImagen[dimensiones[1]];
+            for(int j =0;j<dimensiones[0];j++){
 
+                read(STDIN_FILENO,filaDeLaImagen,dimensiones[1]*sizeof(unsigned char));
+                printf("Estoy aqui\n");
+                for(int k=0;k<dimensiones[1];k++){
+                    matrizGray[j][k]=filaDeLaImagen[k];
+                    fflush(stdin);
+                }
+            }   
 
+        }
+    //}
+    wait(NULL);
+    return 0;
 }
