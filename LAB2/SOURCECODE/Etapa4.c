@@ -36,8 +36,8 @@ int main(int argc,char* argv[]){
         dup2(tuberia[0],STDIN_FILENO);
         close(tuberia[0]);
         close(tuberia[1]);
-        char *args[] = {"Etapa4.out",argv[1],argv[2],argv[3],argv[4],argv[5],NULL};
-        execvp("SOURCECODE/Etapa4.out",args);
+        char *args[] = {"Etapa5.out",argv[1],argv[2],argv[3],argv[4],argv[5],NULL};
+        execvp("SOURCECODE/Etapa5.out",args);
     }
     else{
         dup2(tuberia[1],STDOUT_FILENO);

@@ -24,4 +24,24 @@ void clasificar(unsigned char ** matrizGrayBinarizada,int alto,int ancho,int num
 	}
 }
 
-int main(){printf("Hola Mundo\n");}
+int main(int argc,char* argv[]){
+	int tuberia[2];
+    pipe(tuberia);
+    pid_t pid =fork();
+    if(pid < 0){
+        printf("No se pudo crear el hijo\n");
+        exit(EXIT_FAILURE);
+    }
+    else if(pid == 0){
+        dup2(tuberia[0],STDIN_FILENO);
+        close(tuberia[0]);
+        close(tuberia[1]);
+        char *args[] = {"Etapa6.out",argv[1],argv[2],argv[3],argv[4],argv[5],NULL};
+        execvp("SOURCECODE/Etapa6.out",args);
+    }
+    else{
+        dup2(tuberia[1],STDOUT_FILENO);
+        close(tuberia[0]);
+        close(tuberia[1]);
+    }
+}
