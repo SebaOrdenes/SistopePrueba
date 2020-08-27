@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "../INCLUDE/Etapa5.h"
 //ENTRADA: unsigned char**, int, int, int, int ,int int**
 //FUNCIONAMIENTO: funcion que a partir que sirve para clasificar la imagen una vez convolucionada, para saber si aplica o no como nearly black
@@ -63,6 +65,8 @@ int main(int argc,char* argv[]){
                
            		}
         	}
+        	 
+        
         	clasificar(matrizGrayConvolucionadayBinarizada,dimensiones3[0],dimensiones3[1],atoi(argv[3]),&resultado);
         	int dimensiones4[3];
             dimensiones4[0]=dimensiones3[0];

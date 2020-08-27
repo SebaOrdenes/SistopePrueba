@@ -215,13 +215,9 @@ int main(int argc,char * argv[]){
                     
                 }
             }
-            for(int j=0;j<dimensiones1[0];j++){
-            for(int k=0;k<dimensiones1[1];k++){
-                printf("%d ", matrizGray[j][k]);
-            }
-            printf("\n");
-            } 
+          
             applyFilter(matrizGray,&matrizGrayConvolucionada,dimensiones1[0],dimensiones1[1],argv[5]);
+       
             int dimensiones2[2];
             dimensiones2[0]=dimensiones1[0];
             dimensiones2[1]=dimensiones1[1];

@@ -60,7 +60,6 @@ int main(int argc , char * argv[]){
 				
 			}
 			rgbAgray(dimensiones[2],dimensiones[3],matrizPixeles,&matrizGray);
-			 
 			int dimensiones1[2];
 			dimensiones1[0]=dimensiones[2];
 			dimensiones1[1]=dimensiones[3];

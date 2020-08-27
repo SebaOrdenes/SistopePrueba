@@ -64,6 +64,7 @@ int main(int argc,char* argv[]){
            		}
         	}
         	binarizar(matrizGrayConvolucionada,&matrizGrayConvolucionadayBinarizada,dimensiones2[0],dimensiones2[1],atoi(argv[2]));
+       
         	int dimensiones3[2];
             dimensiones3[0]=dimensiones2[0];
             dimensiones3[1]=dimensiones2[1];

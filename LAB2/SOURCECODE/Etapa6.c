@@ -62,17 +62,14 @@ void escribirImagen(int alto,int ancho,int numeroImagen,unsigned char ** matrizG
 //ENTRADA:int, int,*, int 
 //FUNCIONAMIENTO: imprime los resultados de la clasificación de imagenes por pantalla 
 //SALIDA:no aplica.
-void imprimirResultados(int * resultadosDeLaClasificacion,int cantidadDeImagenes){
-    printf("|    image      |  nearly black  |\n");
-    printf("|---------------|----------------|\n");
-    for(int z=0;z<cantidadDeImagenes;z++){
-        if (resultadosDeLaClasificacion[z]== -1){
-            printf("|   imagen_%d    |       No       |\n",z+1);
-        }
-        else {
-            printf("|   imagen_%d    |       Yes      |\n",z+1);
-        }
+void imprimirResultados(int resultadosDeLaClasificacion,int numeroImagen){
+    if (resultadosDeLaClasificacion== -1){
+            printf("|   imagen_%d    |       No       |\n",numeroImagen);
     }
+    else {
+            printf("|   imagen_%d    |       Yes      |\n",numeroImagen);
+    }
+    
 }
 
 int main(int argc,char* argv[]){
@@ -95,12 +92,14 @@ int main(int argc,char* argv[]){
                
             }
         }
-        for(int j=0;j<dimensiones4[0];j++){
-            for(int k=0;k<dimensiones4[1];k++){
-                printf("%d ", matrizGrayConvolucionadayBinarizada[j][k]);
-            }
-            printf("\n");
+        escribirImagen(dimensiones4[0],dimensiones4[1],i,matrizGrayConvolucionadayBinarizada);
+        if(i==1 && atoi(argv[4])==1){
+            printf("|    image      |  nearly black  |\n");
+            printf("|---------------|----------------|\n");
+            imprimirResultados(dimensiones4[2],i);
         }
-        //escribirImagen(dimensiones4[0],dimensiones4[1],i,matrizGrayConvolucionadayBinarizada);
+        else if(i>1 && atoi(argv[4])==1){
+            imprimirResultados(dimensiones4[2],i);
+        }
     }
 }
