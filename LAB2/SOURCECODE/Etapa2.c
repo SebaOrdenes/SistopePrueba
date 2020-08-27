@@ -53,10 +53,11 @@ int main(int argc , char * argv[]){
 			unsigned char pixeles[3];
 			for(int j =0;j<dimensiones[0];j++){
 				read(STDIN_FILENO,pixeles,3*sizeof(unsigned char));
+				fflush(stdin);
 				matrizPixeles[j][0]=pixeles[0];
 				matrizPixeles[j][1]=pixeles[1];
 				matrizPixeles[j][2]=pixeles[2];
-				fflush(stdin);
+				
 			}
 			rgbAgray(dimensiones[3],dimensiones[4],matrizPixeles,&matrizGray);
 			int dimensiones1[2];

@@ -209,14 +209,25 @@ int main(int argc,char * argv[]){
             for(int j =0;j<dimensiones1[0];j++){
 
                 read(STDIN_FILENO,filaDeLaImagen,dimensiones1[1]*sizeof(unsigned char));
-
+                fflush(stdin);
                 for(int k=0;k<dimensiones1[1];k++){
                     matrizGray[j][k]=filaDeLaImagen[k];
-                    fflush(stdin);
+                    
                 }
             } 
             applyFilter(matrizGray,&matrizGrayConvolucionada,dimensiones1[0],dimensiones1[1],argv[5]);
-
+            int dimensiones2[2];
+            dimensiones2[0]=dimensiones1[0];
+            dimensiones2[1]=dimensiones1[1];
+            write(STDOUT_FILENO,dimensiones2,2*sizeof(int));
+            unsigned char filaDeLaImagen1[dimensiones2[1]];
+            for(int j =0;j<dimensiones2[0];j++){
+                for(int k=0;k<dimensiones2[1];k++){
+                    filaDeLaImagen1[k]=matrizGrayConvolucionada[j][k];
+                }
+                write(STDOUT_FILENO,filaDeLaImagen1,dimensiones2[1]*sizeof(unsigned char));
+                fflush(stdout);
+            }
         }
     }
     wait(NULL);

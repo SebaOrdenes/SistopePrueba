@@ -102,6 +102,7 @@ int main(int argc,char * argv[]){
       while(i < atoi(argv[1])){
         int imagen[1];
         read(STDIN_FILENO,imagen,1*sizeof(int));
+        fflush(stdin);
         leerImagenes(&pixelesAux,&ancho,&alto,imagen[0]);
         int filas = (alto)*(ancho);
         int dimensiones[4];
