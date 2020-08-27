@@ -59,5 +59,48 @@ void escribirImagen(int alto,int ancho,int numeroImagen,unsigned char ** matrizG
     
 }
 
+//ENTRADA:int, int,*, int 
+//FUNCIONAMIENTO: imprime los resultados de la clasificación de imagenes por pantalla 
+//SALIDA:no aplica.
+void imprimirResultados(int * resultadosDeLaClasificacion,int cantidadDeImagenes){
+    printf("|    image      |  nearly black  |\n");
+    printf("|---------------|----------------|\n");
+    for(int z=0;z<cantidadDeImagenes;z++){
+        if (resultadosDeLaClasificacion[z]== -1){
+            printf("|   imagen_%d    |       No       |\n",z+1);
+        }
+        else {
+            printf("|   imagen_%d    |       Yes      |\n",z+1);
+        }
+    }
+}
 
-int main(){printf("Hola Mundo\n");}
+int main(int argc,char* argv[]){
+    unsigned char ** matrizGrayConvolucionadayBinarizada;
+    for(int i=1;i<=atoi(argv[1]);i++){
+        int dimensiones4[3];
+        read(STDIN_FILENO,dimensiones4,3*sizeof(int));
+        fflush(stdin);
+        matrizGrayConvolucionadayBinarizada=(unsigned char**)malloc(dimensiones4[0]*sizeof(unsigned char *));
+        for(int j=0;j<dimensiones4[0];j++){
+            matrizGrayConvolucionadayBinarizada[j]=(unsigned char*)malloc(dimensiones4[1]*sizeof(unsigned char));
+        }
+        unsigned char filaDeLaImagen3[dimensiones4[1]];
+        for(int j =0;j<dimensiones4[0];j++){
+
+            read(STDIN_FILENO,filaDeLaImagen3,dimensiones4[1]*sizeof(unsigned char));
+            fflush(stdin);
+            for(int k=0;k<dimensiones4[1];k++){
+                matrizGrayConvolucionadayBinarizada[j][k]=filaDeLaImagen3[k];
+               
+            }
+        }
+        for(int j=0;j<dimensiones4[0];j++){
+            for(int k=0;k<dimensiones4[1];k++){
+                printf("%d ", matrizGrayConvolucionadayBinarizada[j][k]);
+            }
+            printf("\n");
+        }
+        //escribirImagen(dimensiones4[0],dimensiones4[1],i,matrizGrayConvolucionadayBinarizada);
+    }
+}

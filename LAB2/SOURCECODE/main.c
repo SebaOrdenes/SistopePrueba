@@ -102,21 +102,6 @@ void recibirArgumentos(int argc,char* argv[], char *  i,char * j, char * k, char
 
 
 
-//ENTRADA:int, int,*, int 
-//FUNCIONAMIENTO: imprime los resultados de la clasificación de imagenes por pantalla 
-//SALIDA:no aplica.
-void imprimirResultados(int * resultadosDeLaClasificacion,int cantidadDeImagenes){
-	printf("|    image      |  nearly black  |\n");
-	printf("|---------------|----------------|\n");
-	for(int z=0;z<cantidadDeImagenes;z++){
-  		if (resultadosDeLaClasificacion[z]== -1){
-			printf("|   imagen_%d    |       No       |\n",z+1);
-		}
-		else {
-			printf("|   imagen_%d    |       Yes      |\n",z+1);
-		}
-	}
-}
 
 int main(int argc, char * argv[]){
 	int tuberia[2];

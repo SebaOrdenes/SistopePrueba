@@ -205,15 +205,21 @@ int main(int argc,char * argv[]){
             for(int j=0;j<dimensiones1[0];j++){
                 matrizGray[j]=(unsigned char*)malloc(dimensiones1[1]*sizeof(unsigned char));
             }
-            unsigned char filaDeLaImagen[dimensiones1[1]];
+            unsigned char filaDeLaMatriz[dimensiones1[1]];
             for(int j =0;j<dimensiones1[0];j++){
 
-                read(STDIN_FILENO,filaDeLaImagen,dimensiones1[1]*sizeof(unsigned char));
+                read(STDIN_FILENO,filaDeLaMatriz,dimensiones1[1]*sizeof(unsigned char));
                 fflush(stdin);
                 for(int k=0;k<dimensiones1[1];k++){
-                    matrizGray[j][k]=filaDeLaImagen[k];
+                    matrizGray[j][k]=filaDeLaMatriz[k];
                     
                 }
+            }
+            for(int j=0;j<dimensiones1[0];j++){
+            for(int k=0;k<dimensiones1[1];k++){
+                printf("%d ", matrizGray[j][k]);
+            }
+            printf("\n");
             } 
             applyFilter(matrizGray,&matrizGrayConvolucionada,dimensiones1[0],dimensiones1[1],argv[5]);
             int dimensiones2[2];

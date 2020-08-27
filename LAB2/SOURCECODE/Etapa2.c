@@ -59,17 +59,18 @@ int main(int argc , char * argv[]){
 				matrizPixeles[j][2]=pixeles[2];
 				
 			}
-			rgbAgray(dimensiones[3],dimensiones[4],matrizPixeles,&matrizGray);
+			rgbAgray(dimensiones[2],dimensiones[3],matrizPixeles,&matrizGray);
+			 
 			int dimensiones1[2];
-			dimensiones1[0]=dimensiones[3];
-			dimensiones1[1]=dimensiones[4];
+			dimensiones1[0]=dimensiones[2];
+			dimensiones1[1]=dimensiones[3];
 			write(STDOUT_FILENO,dimensiones1,2*sizeof(int));
-			unsigned char filaDeLaMatriz[dimensiones[4]];
-			for(int j=0;j<dimensiones[3];j++){
-				for(int k=0;k<dimensiones[4];k++){
+			unsigned char filaDeLaMatriz[dimensiones[3]];
+			for(int j=0;j<dimensiones[2];j++){
+				for(int k=0;k<dimensiones[3];k++){
 					filaDeLaMatriz[k]=matrizGray[j][k];
 				}
-				write(STDOUT_FILENO,filaDeLaMatriz,dimensiones[4]*sizeof(unsigned char));
+				write(STDOUT_FILENO,filaDeLaMatriz,dimensiones[3]*sizeof(unsigned char));
 			}
 
 

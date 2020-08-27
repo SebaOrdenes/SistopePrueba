@@ -108,8 +108,8 @@ int main(int argc,char * argv[]){
         int dimensiones[4];
         dimensiones[0] = filas;
         dimensiones[1] = 3;
-        dimensiones[3]=alto;
-        dimensiones[4]=ancho;
+        dimensiones[2]=alto;
+        dimensiones[3]=ancho;
         write(STDOUT_FILENO,dimensiones,4*sizeof(int));
         fflush(stdout);
         for(int j=0;j<filas;j++){
