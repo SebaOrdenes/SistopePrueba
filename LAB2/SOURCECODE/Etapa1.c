@@ -111,8 +111,8 @@ int main(int argc,char * argv[]){
         fflush(stdout);
         for(int j=0;j<filas;j++){
             pixeles[0]=pixelesAux[j][0];
-            pixeles[1]=pixelesAux[j][0];
-            pixeles[2]=pixelesAux[j][0];
+            pixeles[1]=pixelesAux[j][1];
+            pixeles[2]=pixelesAux[j][2];
             write(STDOUT_FILENO,pixeles,3*sizeof(unsigned char));
             fflush(stdout);
         }
