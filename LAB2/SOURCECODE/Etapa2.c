@@ -68,7 +68,6 @@ int main(int argc , char * argv[]){
 				for(int k=0;k<dimensiones[4];k++){
 					filaDeLaMatriz[k]=matrizGray[j][k];
 				}
-				printf("E\n");
 				write(STDOUT_FILENO,filaDeLaMatriz,dimensiones[4]*sizeof(unsigned char));
 			}
 

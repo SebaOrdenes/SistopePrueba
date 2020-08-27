@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "../INCLUDE/Etapa4.h"
 
 //ENTRADA:unsigned char**, unsigned char *** , int , int 
@@ -22,4 +24,4 @@ void binarizar(unsigned char ** matrizGrayConvolucionada,unsigned char *** matri
 		}
 	}
 }
-int main(){printf("Hola Mundo\n");}
+int main(int argc,char* argv[]){}

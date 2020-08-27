@@ -177,7 +177,7 @@ void applyFilter(unsigned char ** MatrizGray,unsigned char *** matrizGrayConvolu
 }
 
 int main(int argc,char * argv[]){
-    /*int tuberia[2];
+    int tuberia[2];
     pipe(tuberia);
     pid_t pid =fork();
     if(pid < 0){
@@ -194,30 +194,31 @@ int main(int argc,char * argv[]){
     else{
         dup2(tuberia[1],STDOUT_FILENO);
         close(tuberia[0]);
-        close(tuberia[1]);*/
+        close(tuberia[1]);
         unsigned char ** matrizGray;
         unsigned char ** matrizGrayConvolucionada;
-        for(int i=1;atoi(argv[1]);i++){
-            int dimensiones[2];
-            read(STDIN_FILENO,dimensiones,2*sizeof(int));
+        for(int i=1;i<=atoi(argv[1]);i++){
+            int dimensiones1[2];
+            read(STDIN_FILENO,dimensiones1,2*sizeof(int));
             fflush(stdin);
-            matrizGray=(unsigned char**)malloc(dimensiones[0]*sizeof(unsigned char *));
-            for(int j=0;j<dimensiones[0];j++){
-                matrizGray[j]=(unsigned char*)malloc(dimensiones[1]*sizeof(unsigned char));
+            matrizGray=(unsigned char**)malloc(dimensiones1[0]*sizeof(unsigned char *));
+            for(int j=0;j<dimensiones1[0];j++){
+                matrizGray[j]=(unsigned char*)malloc(dimensiones1[1]*sizeof(unsigned char));
             }
-            unsigned char filaDeLaImagen[dimensiones[1]];
-            for(int j =0;j<dimensiones[0];j++){
+            unsigned char filaDeLaImagen[dimensiones1[1]];
+            for(int j =0;j<dimensiones1[0];j++){
 
-                read(STDIN_FILENO,filaDeLaImagen,dimensiones[1]*sizeof(unsigned char));
-                printf("Estoy aqui\n");
-                for(int k=0;k<dimensiones[1];k++){
+                read(STDIN_FILENO,filaDeLaImagen,dimensiones1[1]*sizeof(unsigned char));
+
+                for(int k=0;k<dimensiones1[1];k++){
                     matrizGray[j][k]=filaDeLaImagen[k];
                     fflush(stdin);
                 }
-            }   
+            } 
+            applyFilter(matrizGray,&matrizGrayConvolucionada,dimensiones1[0],dimensiones1[1],argv[5]);
 
         }
-    //}
+    }
     wait(NULL);
     return 0;
 }
