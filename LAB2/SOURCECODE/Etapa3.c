@@ -173,4 +173,27 @@ void applyFilter(unsigned char ** MatrizGray,unsigned char *** matrizGrayConvolu
     }
 }
 
-int main(){printf("Hola Mundo\n");}
+int main(int argc,char * argv[]){
+    unsigned char ** matrizGray
+    unsigned char ** matrizGrayConvolucionada;
+    for(int i=1;atoi(argv[1]);i++){
+         int dimensiones[4];
+        read(STDIN_FILENO,dimensiones,4*sizeof(int));
+        fflush(stdin);
+        matrizPixeles=(unsigned char**)malloc(dimensiones[0]*sizeof(unsigned char *));
+        for(int j=0;j<dimensiones[0];j++){
+            matrizPixeles[j]=(unsigned char*)malloc(dimensiones[1]*sizeof(unsigned char));
+        }
+        unsigned char pixeles[3];
+        for(int j =0;j<dimensiones[0];j++){
+            read(STDIN_FILENO,pixeles,3*sizeof(unsigned char));
+            matrizPixeles[j][0]=pixeles[0];
+            matrizPixeles[j][1]=pixeles[1];
+            matrizPixeles[j][2]=pixeles[2];
+            fflush(stdin);
+        }   
+
+    }
+
+
+}

@@ -104,10 +104,12 @@ int main(int argc,char * argv[]){
         read(STDIN_FILENO,imagen,1*sizeof(int));
         leerImagenes(&pixelesAux,&ancho,&alto,imagen[0]);
         int filas = (alto)*(ancho);
-        int dimensiones[2];
+        int dimensiones[4];
         dimensiones[0] = filas;
         dimensiones[1] = 3;
-        write(STDOUT_FILENO,dimensiones,2*sizeof(int));
+        dimensiones[3]=alto;
+        dimensiones[4]=ancho;
+        write(STDOUT_FILENO,dimensiones,4*sizeof(int));
         fflush(stdout);
         for(int j=0;j<filas;j++){
             pixeles[0]=pixelesAux[j][0];
