@@ -44,7 +44,7 @@ int main(int argc , char * argv[]){
 		unsigned char ** matrizGray;
 		for(int i = 1;i<=atoi(argv[1]);i++){
 			int dimensiones[4];
-			read(STDIN_FILENO,dimensiones,4*sizeof(int));
+			read(STDIN_FILENO,dimensiones,4*sizeof(int));// leer las dimensiones de la matriz pixelesAux y de la imagen de la etapa anterior
 			fflush(stdin);
 			matrizPixeles=(unsigned char**)malloc(dimensiones[0]*sizeof(unsigned char *));
 			for(int j=0;j<dimensiones[0];j++){
@@ -52,24 +52,25 @@ int main(int argc , char * argv[]){
 			}
 			unsigned char pixeles[3];
 			for(int j =0;j<dimensiones[0];j++){
-				read(STDIN_FILENO,pixeles,3*sizeof(unsigned char));
+				read(STDIN_FILENO,pixeles,3*sizeof(unsigned char));// leer un pixel de la matriz pixelesAux de la etapa anterior
 				fflush(stdin);
 				matrizPixeles[j][0]=pixeles[0];
 				matrizPixeles[j][1]=pixeles[1];
 				matrizPixeles[j][2]=pixeles[2];
+				//almacenar un pixel por cada iteración
 				
 			}
 			rgbAgray(dimensiones[2],dimensiones[3],matrizPixeles,&matrizGray);
-			int dimensiones1[2];
-			dimensiones1[0]=dimensiones[2];
-			dimensiones1[1]=dimensiones[3];
+			int dimensiones1[2];// dimensiones de la matrizGray. Estas dimensiones coinciden con las de la imagen original.
+			dimensiones1[0]=dimensiones[2];// cantidad de filas
+			dimensiones1[1]=dimensiones[3];//cantidad de columnas.
 			write(STDOUT_FILENO,dimensiones1,2*sizeof(int));
-			unsigned char filaDeLaMatriz[dimensiones[3]];
+			unsigned char filaDeLaMatriz[dimensiones[3]];// para enviar una fila de la matriz gray a la siguiente etapa.
 			for(int j=0;j<dimensiones[2];j++){
 				for(int k=0;k<dimensiones[3];k++){
 					filaDeLaMatriz[k]=matrizGray[j][k];
 				}
-				write(STDOUT_FILENO,filaDeLaMatriz,dimensiones[3]*sizeof(unsigned char));
+				write(STDOUT_FILENO,filaDeLaMatriz,dimensiones[3]*sizeof(unsigned char));// escrbiendo una fila.
 			}
 
 

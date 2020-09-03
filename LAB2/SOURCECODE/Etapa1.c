@@ -105,18 +105,18 @@ int main(int argc,char * argv[]){
         fflush(stdin);
         leerImagenes(&pixelesAux,&ancho,&alto,imagen[0]);
         int filas = (alto)*(ancho);
-        int dimensiones[4];
-        dimensiones[0] = filas;
-        dimensiones[1] = 3;
-        dimensiones[2]=alto;
-        dimensiones[3]=ancho;
-        write(STDOUT_FILENO,dimensiones,4*sizeof(int));
+        int dimensiones[4];//arreglo para almacenar las dimensiones de la matriz pixelesAux y de la imagen
+        dimensiones[0] = filas;// cantidad de filas de la matriz pixelesAux
+        dimensiones[1] = 3;//cantidad de columnas de la matriz pixelesAux
+        dimensiones[2]=alto;//cantidad filas de la imagen
+        dimensiones[3]=ancho;//cantidadcolumnas de la imagen
+        write(STDOUT_FILENO,dimensiones,4*sizeof(int));//escribir el arreglo dimensiones para que sea leído en la siguiente etapa
         fflush(stdout);
         for(int j=0;j<filas;j++){
             pixeles[0]=pixelesAux[j][0];
             pixeles[1]=pixelesAux[j][1];
             pixeles[2]=pixelesAux[j][2];
-            write(STDOUT_FILENO,pixeles,3*sizeof(unsigned char));
+            write(STDOUT_FILENO,pixeles,3*sizeof(unsigned char));//escrbir un pixel para que sea leído en la siguiente etapa.
             fflush(stdout);
         }
         liberarMemoriaMatriz(pixelesAux,alto*ancho);

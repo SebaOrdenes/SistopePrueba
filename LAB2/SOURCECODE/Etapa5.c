@@ -4,8 +4,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "../INCLUDE/Etapa5.h"
-//ENTRADA: unsigned char**, int, int, int, int ,int int**
-//FUNCIONAMIENTO: funcion que a partir que sirve para clasificar la imagen una vez convolucionada, para saber si aplica o no como nearly black
+//ENTRADA: unsigned char**, int, int, int, int *
+//FUNCIONAMIENTO: funcionp que sirve para clasificar la imagen una vez convolucionada y binarizada, con el fin de determinar si nearly black o no
 //SALIDA: no aplica
 void clasificar(unsigned char ** matrizGrayBinarizada,int alto,int ancho,int umbralClasificar,int * resultadosDeClasificacion){
 	int cantidadDePixelesNegros=0;
@@ -19,10 +19,10 @@ void clasificar(unsigned char ** matrizGrayBinarizada,int alto,int ancho,int umb
 	}
 	porcentajeDePixelesNegros=(int)(((double)cantidadDePixelesNegros/(double)(alto * ancho))*100.0);
 	if(porcentajeDePixelesNegros>=umbralClasificar){
-		*resultadosDeClasificacion=1;
+		*resultadosDeClasificacion=1;// nearly black
 	}
 	else{
-		*resultadosDeClasificacion=-1;
+		*resultadosDeClasificacion=-1;// no nearly black
 	}
 }
 
@@ -68,18 +68,18 @@ int main(int argc,char* argv[]){
         	 
         
         	clasificar(matrizGrayConvolucionadayBinarizada,dimensiones3[0],dimensiones3[1],atoi(argv[3]),&resultado);
-        	int dimensiones4[3];
-            dimensiones4[0]=dimensiones3[0];
-            dimensiones4[1]=dimensiones3[1];
-            dimensiones4[2]=resultado;
+        	int dimensiones4[3];//dimensiones de la matrizGrayConvolucionadayBinarizada y el resulato de la clasificacion
+            dimensiones4[0]=dimensiones3[0];// cantidad de filas
+            dimensiones4[1]=dimensiones3[1];// cantidad de columnas
+            dimensiones4[2]=resultado;// resultado de la clasificacion
 
-            write(STDOUT_FILENO,dimensiones4,3*sizeof(int));
+            write(STDOUT_FILENO,dimensiones4,3*sizeof(int));// escribir el arreglo dimensiones4
             unsigned char filaDeLaImagen3[dimensiones4[1]];
             for(int j =0;j<dimensiones4[0];j++){
                 for(int k=0;k<dimensiones4[1];k++){
                     filaDeLaImagen3[k]=matrizGrayConvolucionadayBinarizada[j][k];
                 }
-                write(STDOUT_FILENO,filaDeLaImagen3,dimensiones4[1]*sizeof(unsigned char));
+                write(STDOUT_FILENO,filaDeLaImagen3,dimensiones4[1]*sizeof(unsigned char));// escrbir una fila de la matrizGrayConvolucionadayBinarizada
                 fflush(stdout);
             }
         } 

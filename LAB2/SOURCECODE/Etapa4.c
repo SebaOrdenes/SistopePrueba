@@ -46,7 +46,7 @@ int main(int argc,char* argv[]){
         unsigned char ** matrizGrayConvolucionada;
         unsigned char ** matrizGrayConvolucionadayBinarizada;
         for(int i=1;i<=atoi(argv[1]);i++){ 
-        	int dimensiones2[2];
+        	int dimensiones2[2];// leer las dimensiones
         	read(STDIN_FILENO,dimensiones2,2*sizeof(int));
         	fflush(stdin);
        		matrizGrayConvolucionada=(unsigned char**)malloc(dimensiones2[0]*sizeof(unsigned char *));
@@ -56,7 +56,7 @@ int main(int argc,char* argv[]){
         	unsigned char filaDeLaImagen1[dimensiones2[1]];
         	for(int j =0;j<dimensiones2[0];j++){
 
-           		read(STDIN_FILENO,filaDeLaImagen1,dimensiones2[1]*sizeof(unsigned char));
+           		read(STDIN_FILENO,filaDeLaImagen1,dimensiones2[1]*sizeof(unsigned char));// leer una fila de la matrizGrayConvolucionada de la etapa anterior
            		fflush(stdin);
            		for(int k=0;k<dimensiones2[1];k++){
                		matrizGrayConvolucionada[j][k]=filaDeLaImagen1[k];
@@ -65,16 +65,16 @@ int main(int argc,char* argv[]){
         	}
         	binarizar(matrizGrayConvolucionada,&matrizGrayConvolucionadayBinarizada,dimensiones2[0],dimensiones2[1],atoi(argv[2]));
        
-        	int dimensiones3[2];
-            dimensiones3[0]=dimensiones2[0];
-            dimensiones3[1]=dimensiones2[1];
+        	int dimensiones3[2];//dimensiones de la matrizGrayConvolucionadayBinarizada
+            dimensiones3[0]=dimensiones2[0];//cantidad de filas
+            dimensiones3[1]=dimensiones2[1];//cantidad de columnas
             write(STDOUT_FILENO,dimensiones3,2*sizeof(int));
             unsigned char filaDeLaImagen2[dimensiones3[1]];
             for(int j =0;j<dimensiones3[0];j++){
                 for(int k=0;k<dimensiones3[1];k++){
                     filaDeLaImagen2[k]=matrizGrayConvolucionadayBinarizada[j][k];
                 }
-                write(STDOUT_FILENO,filaDeLaImagen2,dimensiones3[1]*sizeof(unsigned char));
+                write(STDOUT_FILENO,filaDeLaImagen2,dimensiones3[1]*sizeof(unsigned char));//escrbir una filas de la matrizGrayConvolucionadayBinarizada.
                 fflush(stdout);
             }
         } 

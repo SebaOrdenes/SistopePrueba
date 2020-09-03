@@ -109,7 +109,7 @@ int main(int argc, char * argv[]){
 	char cantidadDeImagenes[100], umbralParaBinarizarLaImagen[100],umbralParaClasificacion[100],bandera[100];
 	char nombreArchivoMascara[100];
 	strcpy(bandera,"0");
-	recibirArgumentos(argc,argv,cantidadDeImagenes,umbralParaBinarizarLaImagen,umbralParaClasificacion,nombreArchivoMascara,bandera);//Etapa0
+	recibirArgumentos(argc,argv,cantidadDeImagenes,umbralParaBinarizarLaImagen,umbralParaClasificacion,nombreArchivoMascara,bandera);//verificar y almacenar los parametros ingresados a través de la terminal.
 	pid_t pid = fork();
 	if(pid < 0){
 		printf("Fallo la creación del hijo\n");
@@ -130,7 +130,7 @@ int main(int argc, char * argv[]){
 		int imagen[1];
 		while(i<=atoi(cantidadDeImagenes)){
 			imagen[0]=i;
-			write(STDOUT_FILENO,imagen,1*sizeof(int));
+			write(STDOUT_FILENO,imagen,1*sizeof(int));// escrbir el número de la imagen para que sea leído en la siguiente etapa.
 			i++;
 		}
 	}

@@ -75,7 +75,7 @@ void imprimirResultados(int resultadosDeLaClasificacion,int numeroImagen){
 int main(int argc,char* argv[]){
     unsigned char ** matrizGrayConvolucionadayBinarizada;
     for(int i=1;i<=atoi(argv[1]);i++){
-        int dimensiones4[3];
+        int dimensiones4[3];//leer las dimensiones
         read(STDIN_FILENO,dimensiones4,3*sizeof(int));
         fflush(stdin);
         matrizGrayConvolucionadayBinarizada=(unsigned char**)malloc(dimensiones4[0]*sizeof(unsigned char *));
@@ -85,7 +85,7 @@ int main(int argc,char* argv[]){
         unsigned char filaDeLaImagen3[dimensiones4[1]];
         for(int j =0;j<dimensiones4[0];j++){
 
-            read(STDIN_FILENO,filaDeLaImagen3,dimensiones4[1]*sizeof(unsigned char));
+            read(STDIN_FILENO,filaDeLaImagen3,dimensiones4[1]*sizeof(unsigned char));//leer una fila de la matriz de la etapa anterior
             fflush(stdin);
             for(int k=0;k<dimensiones4[1];k++){
                 matrizGrayConvolucionadayBinarizada[j][k]=filaDeLaImagen3[k];

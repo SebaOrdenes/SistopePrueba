@@ -199,7 +199,7 @@ int main(int argc,char * argv[]){
         unsigned char ** matrizGrayConvolucionada;
         for(int i=1;i<=atoi(argv[1]);i++){
             int dimensiones1[2];
-            read(STDIN_FILENO,dimensiones1,2*sizeof(int));
+            read(STDIN_FILENO,dimensiones1,2*sizeof(int));//leer las dimensiones de la matrizGray de la etapa anterior
             fflush(stdin);
             matrizGray=(unsigned char**)malloc(dimensiones1[0]*sizeof(unsigned char *));
             for(int j=0;j<dimensiones1[0];j++){
@@ -208,26 +208,26 @@ int main(int argc,char * argv[]){
             unsigned char filaDeLaMatriz[dimensiones1[1]];
             for(int j =0;j<dimensiones1[0];j++){
 
-                read(STDIN_FILENO,filaDeLaMatriz,dimensiones1[1]*sizeof(unsigned char));
+                read(STDIN_FILENO,filaDeLaMatriz,dimensiones1[1]*sizeof(unsigned char));//leer una fila de la etapa anterior
                 fflush(stdin);
                 for(int k=0;k<dimensiones1[1];k++){
                     matrizGray[j][k]=filaDeLaMatriz[k];
-                    
+                    // almacenar una fila de la matrizGray, correspondiente a la etapa anterior
                 }
             }
           
             applyFilter(matrizGray,&matrizGrayConvolucionada,dimensiones1[0],dimensiones1[1],argv[5]);
        
-            int dimensiones2[2];
-            dimensiones2[0]=dimensiones1[0];
-            dimensiones2[1]=dimensiones1[1];
+            int dimensiones2[2];// dimensiones de la matrizGrayCOnvolucionada
+            dimensiones2[0]=dimensiones1[0];// cantidad de filas
+            dimensiones2[1]=dimensiones1[1];// cantidad de columnas
             write(STDOUT_FILENO,dimensiones2,2*sizeof(int));
-            unsigned char filaDeLaImagen1[dimensiones2[1]];
+            unsigned char filaDeLaImagen1[dimensiones2[1]];//arreglo para enviar una fila de la matrizGrayConvolucionada.
             for(int j =0;j<dimensiones2[0];j++){
                 for(int k=0;k<dimensiones2[1];k++){
                     filaDeLaImagen1[k]=matrizGrayConvolucionada[j][k];
                 }
-                write(STDOUT_FILENO,filaDeLaImagen1,dimensiones2[1]*sizeof(unsigned char));
+                write(STDOUT_FILENO,filaDeLaImagen1,dimensiones2[1]*sizeof(unsigned char));//escribir la fila.
                 fflush(stdout);
             }
         }
