@@ -8,22 +8,6 @@
 
 #include "../INCLUDE/Etapa3.h"
 
-//ENTRADA: char[], int
-//FUNCIONAMIENTO: funcion que valida, segun la posicion del buffer, si es un numero o no.
-//SALIDA: no aplica
-void validar(char num[], int cont){
-    for (int i = cont; i < strlen(num); i++)
-    {
-
-        if(!isdigit(num[i]) ) {
-            
-            printf("El símbolo %c no es valido\n",num[i]);
-            exit(EXIT_FAILURE);
-            break;
-        }
-       
-    }
-}
 
 
 
@@ -33,38 +17,14 @@ void validar(char num[], int cont){
 
 int* leerMascara(char*nombreMascara, int*numeros){
     FILE *fp;
-    int i= 0;
+    int i = 0;
 	fp = fopen (nombreMascara, "r" );        
-	if (fp==NULL) {fputs ("File error",stderr); exit (1);}
     char buffer[256];
-    
-     
     while(!feof(fp)){
         fscanf(fp,"%s\n",buffer);
-        if(strlen(buffer)==1 && buffer[0]=='-'){  //si es un caracter y es - el programa muere
-            exit(EXIT_FAILURE);
-        }
-        if (buffer[0]== '-')  //validar que si es un numero negativo, corresponda al patron "-numero"
-        {
-            validar(buffer,1);
-        }
-        else{
-            validar(buffer,1);
-        } //validamos todos los caracteres siguientes
-
-        if(i>=9){    // esto por si nos ingresan un numero o caracter adicional a la matriz de 3x3
-          printf("Error. La cantidad de números en el archivo es mayor a 9\n");
-          exit(EXIT_FAILURE);
-        }
-
         numeros[i]= atoi(buffer);
         i++;
-
     } 
-    if (i<9){
-        printf("Error. La cantidad de números en el archivo es menor a 9\n");
-        exit(EXIT_FAILURE);
-    }
     fclose ( fp );
     return(numeros);
 } 

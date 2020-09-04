@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
-
+#include "../INCLUDE/main.h"
 
 
 //Entradas:Char *
@@ -37,6 +37,62 @@ void verificarSiEsNumeroEntero( char* numeroAux,int numero,char simbolo){
 		exit(EXIT_FAILURE);
 	}
 }
+
+//ENTRADA: char[], int, char *
+//FUNCIONAMIENTO: funcion que valida, segun la posicion del buffer, si es un numero o no.
+//SALIDA: no aplica
+void validar(char num[], int cont, char * nombreMascara){
+    for (int i = cont; i < strlen(num); i++)
+    {
+
+        if(!isdigit(num[i]) ) {
+            
+            printf("Error en el archivo '%s'. El símbolo %c no es valido.\n",nombreMascara,num[i]);
+            exit(EXIT_FAILURE);
+            break;
+        }
+       
+    }
+}
+
+//ENTRADA:char*, int*
+//FUNCIONAMIENTO: funcion que lee la mascara y retorna un arreglo de 9 posiciones
+//SALIDA: arreglo de int
+
+void leerMascara(char*nombreMascara){
+    FILE *fp;
+    int i= 0;
+	fp = fopen (nombreMascara, "r" );        
+    char buffer[256];
+    
+     
+    while(!feof(fp)){
+        fscanf(fp,"%s\n",buffer);
+        if(strlen(buffer)==1 && buffer[0]=='-'){  //si es un caracter y es - el programa aborta su ejución.
+            printf("Error en el archivo '%s'.El simbolo - sin un número no está permitido.\n",nombreMascara);
+            exit(EXIT_FAILURE);
+        }
+        if (buffer[0]== '-')  //validar que si es un numero negativo, corresponda al patron "-numero"
+        {
+            validar(buffer,1,nombreMascara);
+        }
+        else{
+            validar(buffer,1,nombreMascara);
+        } //validamos todos los caracteres siguientes
+
+        if(i>=9){    // esto por si nos ingresan un numero o caracter adicional a la matriz de 3x3
+          printf("Error. La cantidad de números en el archivo '%s' es mayor a 9\n",nombreMascara);
+          exit(EXIT_FAILURE);
+        }
+        i++;
+    } 
+    if (i<9){
+        printf("Error. La cantidad de números en el archivo '%s' es menor a 9\n",nombreMascara);
+        exit(EXIT_FAILURE);
+    }
+    fclose ( fp );
+} 
+
 //Entradas:int, char*, in*, int*, int*, char*, int*
 //Funcionamiento: funcion principal que recibe los argumentos de entrada cuando se invoca el pipeline
 //Salidas: no aplica
@@ -45,6 +101,8 @@ void recibirArgumentos(int argc,char* argv[], char *  i,char * j, char * k, char
 	int cantidadDeImagenes,umbralParaBinarizarLaImagen,umbralParaClasificacion;
 	int opt;
 	FILE *archivo;
+	char nombre[20];
+	FILE * imagen;
 	if(argc<9){
 		printf("Se ingreso un numero incorrecto de argumentos\n");
 		fprintf(stderr, "Uso correcto: %s [-c numero entero] [-u numero entero] [-n numero entero] [-m cadena de texto][-b]\n",argv[0]);
@@ -55,6 +113,14 @@ void recibirArgumentos(int argc,char* argv[], char *  i,char * j, char * k, char
 			case 'c':
 					cantidadDeImagenes= strtol(optarg, &numeroAux,10);
 					verificarSiEsNumeroEntero(numeroAux,cantidadDeImagenes,'c');
+					for(int i=1;i<=cantidadDeImagenes;i++){
+						sprintf(nombre,"imagen_%i.jpg",i);      
+  						if ((imagen = fopen(nombre, "rb")) == NULL) {
+    						fprintf(stderr, "Error. La %s no existe, por favor verificar que la cantidad de imagenes sea igual a las que existen en el direcctorio.\n", nombre);
+    						exit(EXIT_FAILURE);
+  						}
+  						fclose(imagen);
+					}
 					strcpy(i,optarg);
 					break;
 			case 'u':
@@ -84,7 +150,7 @@ void recibirArgumentos(int argc,char* argv[], char *  i,char * j, char * k, char
 						printf("El archivo %s no existe en el directorio.\n", optarg);
 						exit(EXIT_FAILURE);
 					}
-					fclose(archivo);
+					leerMascara(optarg);
 					strcpy(nombreArchivoMascara,optarg);
 					break;
 			case 'b':

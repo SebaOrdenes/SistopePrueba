@@ -23,10 +23,7 @@ void leerImagenes(unsigned char *** pixeles,int* ancho,int * alto,int i) {
   FILE * imagen;
  	contador=0;
   sprintf(nombre,"imagen_%i.jpg",i);      
-  if ((imagen = fopen(nombre, "rb")) == NULL) {
-    	fprintf(stderr, "No se puede abrir la imagen%s\n", nombre);
-    	exit(EXIT_FAILURE);
-  }
+  imagen = fopen(nombre, "rb");
   cinfo.err = jpeg_std_error(&jerr);
   jpeg_create_decompress(&cinfo);
   (void)jpeg_stdio_src(&cinfo, imagen);
